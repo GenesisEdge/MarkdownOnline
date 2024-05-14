@@ -2240,6 +2240,16 @@ markdown-it-code-copy@^0.1.2:
     clipboard "^2.0.6"
     lodash "^4.17.15"
 
+markdown-it-container@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmmirror.com/markdown-it-container/-/markdown-it-container-2.0.0.tgz#0019b43fd02eefece2f1960a2895fba81a404695"
+  integrity sha512-IxPOaq2LzrGuFGyYq80zaorXReh2ZHGFOB1/Hen429EJL1XkPI3FJTpx9TsJeua+j2qTru4h3W1TiCRdeivMmA==
+
+markdown-it-container@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmmirror.com/markdown-it-container/-/markdown-it-container-4.0.0.tgz#3912394f7da6e8ef3b43a0f58b1d0ded851f2a38"
+  integrity sha512-HaNccxUH0l7BNGYbFbjmGpf5aLHAMTinqRZQAEQbMr2cdD3z91Q6kIo1oUn1CQndkT03jat6ckrdRYuwwqLlQw==
+
 markdown-it-emoji@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmmirror.com/markdown-it-emoji/-/markdown-it-emoji-3.0.0.tgz"
@@ -2280,6 +2290,13 @@ markdown-it-task-lists@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmmirror.com/markdown-it-task-lists/-/markdown-it-task-lists-2.1.1.tgz#f68f4d2ac2bad5a2c373ba93081a1a6848417088"
   integrity sha512-TxFAc76Jnhb2OUu+n3yz9RMu4CwGfaT788br6HhEDlvWfdeJcLUsxk1Hgw2yJio0OXsxv7pyIPmvECY7bMbluA==
+
+markdown-it-tips@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmmirror.com/markdown-it-tips/-/markdown-it-tips-1.0.3.tgz#ff4c3fe2ffbcd76b53e5c51511c1c79f4b45fa94"
+  integrity sha512-URn7WyEng7g+4X4xVxV4a+KiidhIjNUSdtfNC+ymBPiNN54x0RaXw2ScSLr13xOnQyXB4BvPkM9HPTwm6eQrDw==
+  dependencies:
+    markdown-it-container "^2.0.0"
 
 markdown-it@^14.0.0:
   version "14.0.0"

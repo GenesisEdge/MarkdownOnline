@@ -35,9 +35,9 @@ export function monacoPasteEvent(
         if (base64Arr) {
           let insertImgText: string = ""
           let timeStamp = new Date().getTime()
-          console.log(base64Arr)
+          // console.log(base64Arr)
           for (let i = 0; i <= base64Arr.length - 1; i++) {
-            console.log(i)
+            // console.log(i)
             insertImgText += `![我是图片](/vf/${timeStamp + i})`
           }
           fillInMemoryImgs(base64Arr, timeStamp)

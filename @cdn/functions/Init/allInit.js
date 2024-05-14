@@ -61,6 +61,23 @@ export function markdownParser() {
         .use(markdownItEmoji)
         .use(markdownItLatex)
         .use(markdownItTaskLists)
+        // .use(markdownItContrainer, "spoiler", {
+        //   validate: function (params) {
+        //     return params.trim().match(/^spoiler\s+(.*)$/)
+        //   },
+        //   render: function (tokens, idx) {
+        //     var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/)
+        //     if (tokens[idx].nesting === 1) {
+        //       // opening tag
+        //       return (
+        //         "<details><summary>" + markdownIt.utils.escapeHtml(m[1]) + "</summary>\n"
+        //       )
+        //     } else {
+        //       // closing tag
+        //       return "</details>\n"
+        //     }
+        //   },
+        // })
         .use(MarkdownItIncrementalDOM, IncrementalDOM);
     // .use(markdownItCodeCopy)
     // .use(figure)
