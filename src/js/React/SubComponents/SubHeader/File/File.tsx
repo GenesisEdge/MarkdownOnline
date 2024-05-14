@@ -17,6 +17,7 @@ import React from "react"
 import SwitchIOS from "@Root/js/React/Components/myCom/Switches/SwitchIOS"
 import MyPaper from "@Root/js/React/Components/myCom/Paper"
 import alertUseArco from "@App/message/alert"
+import { FileFolderManager } from "@App/fileSystem/file"
 
 const fileManager = new FileManager()
 let _t: NodeJS.Timeout | null
@@ -92,6 +93,20 @@ const FileDrawer = observer(function FileDrawer() {
               color="primary"
             >
               打开文件
+            </Button>
+            <Button
+              sx={{ mb: "10px" }}
+              variant="contained"
+              color="primary"
+              onClick={async () => {
+                let fileFolderManager = new FileFolderManager()
+                const directoryHandle = await fileFolderManager.openDirectory()
+                if (directoryHandle) {
+                  fileFolderManager.createNewFolder(directoryHandle, "test2")
+                }
+              }}
+            >
+              打开文件夹
             </Button>
             <Button
               sx={{ mb: "10px" }}

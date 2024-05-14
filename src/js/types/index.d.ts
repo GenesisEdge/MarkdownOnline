@@ -212,14 +212,16 @@ declare interface Window {
   deco: any
   katex: any
   mermaid: any
-  loadPyodide:any
+  loadPyodide: any
   _speechData: {
     processing: Boolean
     speechResult: string
     speech: any
   }
-  showOpenFilePicker: Promise<FileSystemDirectoryHandle> | any
-  showDirectoryPicker: FileSystemDirectoryHandle
+  showOpenFilePicker: (
+    options?: FilePickerOptions
+  ) => Promise<FileSystemFileHandle[]>
+  showDirectoryPicker: () => Promise<FileSystemDirectoryHandle>
   showSaveFilePicker(
     options?: SaveFilePickerOptions
   ): Promise<FileSystemFileHandle>
