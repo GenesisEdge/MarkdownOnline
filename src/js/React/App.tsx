@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import React from "react"
+import React, { Suspense } from "react"
 import Header from "./SubComponents/Header"
 
 import Body from "./SubComponents/Body"
@@ -11,8 +11,9 @@ import { orange, green, grey, common, blue, pink } from "@mui/material/colors"
 import { getTheme } from "@App/config/change"
 import { Backdrop, Box, CircularProgress } from "@mui/material"
 import kit from "bigonion-kit"
-// import Box from "@mui/material/Box"
-// import TB from "@Com/myCom/Layout/TB"
+
+// const LazyHeader = React.lazy(() => import("./SubComponents/Header"))
+
 const bothStyle: ThemeOptions = {
   zIndex: { drawer: 1300, modal: 1200, appBar: 1200 },
 }
@@ -54,7 +55,6 @@ const darkTheme = createTheme({
   },
 })
 const App: any = observer(() => {
-
   React.useEffect(() => {
     kit.addStyle(`
     ::selection {

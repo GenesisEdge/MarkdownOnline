@@ -225,8 +225,8 @@ declare interface Window {
   showSaveFilePicker(
     options?: SaveFilePickerOptions
   ): Promise<FileSystemFileHandle>
-
   _fileHandle: FileSystemFileHandle
+  _directoryHandle: FileSystemDirectoryHandle
   _temp: any
 }
 interface a extends ShowSaveFilePicker {}

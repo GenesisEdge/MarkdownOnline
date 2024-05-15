@@ -18,10 +18,14 @@ import SwitchIOS from "@Root/js/React/Components/myCom/Switches/SwitchIOS"
 import MyPaper from "@Root/js/React/Components/myCom/Paper"
 import alertUseArco from "@App/message/alert"
 import { FileFolderManager } from "@App/fileSystem/file"
+import RenamableSimpleTreeView from "./SubFile.tsx/FileFolder"
+import FileManagment from "./SubFile.tsx/FileManager"
+import FileExplorer from "./SubFile.tsx/FileManager"
 
 const fileManager = new FileManager()
 let _t: NodeJS.Timeout | null
 const FileDrawer = observer(function FileDrawer() {
+  const [fileDirectoryArr, setFileDirectoryArr] = React.useState<any>([])
   const [editingFileName, setEditingFileName] = React.useState("")
   const theme = useTheme()
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -64,6 +68,7 @@ const FileDrawer = observer(function FileDrawer() {
           }}
         >
           <Box className={"FLEX COL"}>
+            <FileExplorer fileDirectoryArr={fileDirectoryArr} />
             <Typography>
               {getSettings().basic.fileEditLocal ? editingFileName : ""}
             </Typography>
@@ -102,7 +107,17 @@ const FileDrawer = observer(function FileDrawer() {
                 let fileFolderManager = new FileFolderManager()
                 const directoryHandle = await fileFolderManager.openDirectory()
                 if (directoryHandle) {
-                  fileFolderManager.createNewFolder(directoryHandle, "test2")
+                  // fileFolderManager.listDirectory(directoryHandle)
+                  // console.log(
+                  //   await fileFolderManager.listDirectoryAsObject(
+                  //     directoryHandle
+                  //   )
+                  // )
+                  setFileDirectoryArr(
+                    await fileFolderManager.readDirectoryAsArray(directoryHandle)
+                  )
+                  console.log(await fileFolderManager.readDirectoryAsArray(directoryHandle));
+                  // fileFolderManager.createNewFolder(directoryHandle, "test2")
                 }
               }}
             >

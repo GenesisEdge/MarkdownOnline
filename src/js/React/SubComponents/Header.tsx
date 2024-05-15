@@ -24,7 +24,6 @@ import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 // import Button from "@mui/material/Button"
 import { grey, lime, purple } from "@mui/material/colors"
-import Menu from "./SubHeader/Menu"
 import ImageManger from "./SubHeader/SubImgManager/ImageManager"
 import HomeIcon from "@mui/icons-material/Home"
 // import Stack from "@mui/material/"
@@ -35,14 +34,17 @@ import kit from "@cdn-kit"
 import MyButton from "../Components/myCom/CustomButton"
 import myPrint from "@App/export/myPrint"
 import aboutBox from "@Func/Events/aboutBox"
-// import Alert from "@mui/material/Alert"
-// Arco-Design
-// import { Message } from '@arco-design/web-react';
+import MoreVertIcon from "@mui/icons-material/MoreVert"
 import { Message } from "@arco-design/web-react"
 import { useImage } from "@Root/js/React/Mobx/Image"
 import { observer } from "mobx-react"
 import { useTheme } from "@mui/material"
 import FileDrawer from "./SubHeader/File/File"
+import alertUseArco from "@App/message/alert"
+import Menu from "./SubHeader/Menu"
+import { Suspense } from "react"
+
+const LazyMenu = React.lazy(() => import("./SubHeader/Menu"))
 
 interface Props {
   /**
@@ -79,19 +81,10 @@ const DrawerAppBar = observer((props: Props) => {
 
   const container =
     window !== undefined ? () => window().document.body : undefined
-
-  const [alertState, setAlertState] = React.useState<boolean>(false)
   const handleAlert = () => {
-    // setAlertState((pre) => !pre)
-    Message.info({
-      content: "此功能仍然在开发中",
-      closable: true,
-      duration: 3000,
-      position: "bottom",
-    })
+    alertUseArco("此功能仍然在开发中", 3000, { kind: "info" })
   }
   const drawer = (
-    // <ThemeProvider theme={theme}>
     <Box
       onClick={handleDrawerToggle}
       sx={{ textAlign: "center", height: "100%", bgcolor: "black" }}
@@ -229,7 +222,15 @@ const DrawerAppBar = observer((props: Props) => {
               >
                 关于
               </MyButton>
-              <Menu />
+              <Suspense
+                fallback={
+                  <MyButton open={open} endIcon={<MoreVertIcon />}>
+                    {"更多"}
+                  </MyButton>
+                }
+              >
+                <LazyMenu />
+              </Suspense>
               <ImageManger />
               <FileDrawer />
             </Box>

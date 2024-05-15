@@ -6,8 +6,10 @@ import MdArea from "./SubBody/MdArea"
 import { observer } from "mobx-react"
 import EmojiPicker from "@Com/myCom/EmojiPicker"
 import { getEmojiPickerState, getTheme } from "@App/config/change"
-import CodePlugin from "@Func/Plugins/code"
+import { Suspense } from "react"
 
+// 使用 React.lazy 懒加载组件
+const LazyEmojiPicker = React.lazy(() => import("@Com/myCom/EmojiPicker"))
 function enEvents(doIt: boolean): void {
   if (doIt) {
     enObj.enFastKey ? fastKeyEvent() : undefined
@@ -20,31 +22,6 @@ export default observer(function Body() {
 
   React.useEffect(() => {
     enEvents(true)
-    // const articleElement = articleRef.current
-
-    // if (articleElement) {
-    //   // 创建一个 observer 实例，关联一个回调函数来执行当观察到变化时
-    //   const observer = new MutationObserver((mutations) => {
-    //     // 这个回调函数会在DOM变化时被调用
-    //     mutations.forEach((mutation) => {
-    //       if (mutation.type === "childList") {
-    //         // console.log("Article content has changed")
-    //       }
-    //     })
-    //   })
-
-    //   // 使用配置文件开始观察目标节点
-    //   observer.observe(articleElement, {
-    //     attributes: false,
-    //     childList: false, // 监听子元素的增加或删除
-    //     subtree: false, // 监听所有下级节点
-    //   })
-
-    //   // 当组件卸载时，断开观察器
-    //   return () => {
-    //     observer.disconnect()
-    //   }
-    // }
   }, [])
   return (
     <>
@@ -75,7 +52,11 @@ export default observer(function Body() {
             ></div>
           </div>
         </div>
-        <EmojiPicker open={getEmojiPickerState() === "on" ? true : false} />
+        <Suspense fallback={<></>}>
+          <LazyEmojiPicker
+            open={getEmojiPickerState() === "on" ? true : false}
+          />
+        </Suspense>
       </div>
       {/* <CircularLoadingButton></CircularLoadingButton> */}
     </>

@@ -11,7 +11,7 @@ export default async () => {
 </div>
 `
   await fetch(
-    "https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@main/source/assets/about.md"
+    "https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@main/src/assets/about.md"
   )
     .then(async (response) => {
       aboutMd = response.text()

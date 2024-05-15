@@ -1,3 +1,6 @@
+import { ExtendedTreeItemProps } from "@Root/js/React/SubComponents/SubHeader/File/SubFile.tsx/FileManager"
+import { TreeViewBaseItem } from "@mui/x-tree-view/models/items"
+
 const supportFileTypes = [".md", ".py", ".js", ".ts"]
 
 /**
@@ -12,7 +15,7 @@ export class FileManager {
     if (fileHandle) {
       this.fileHandle = fileHandle
     } else {
-      this.fileHandle = window._fileHandle ?? window._fileHandle
+      this.fileHandle = window._fileHandle
     }
   }
 
@@ -97,42 +100,133 @@ export class FileManager {
  * @description 处理文件夹类
  */
 export class FileFolderManager {
-  private directoryHandle: FileSystemDirectoryHandle | undefined
+  protected topDirectoryHandle: FileSystemDirectoryHandle | undefined
+  protected currentDirectoryHandle: FileSystemDirectoryHandle | undefined
+
   constructor(directoryHandle?: FileSystemDirectoryHandle) {
     if (directoryHandle) {
-      this.directoryHandle = directoryHandle
-    } else directoryHandle = undefined
+      this.topDirectoryHandle = directoryHandle
+      this.currentDirectoryHandle = directoryHandle
+    } else {
+      this.topDirectoryHandle = window._directoryHandle
+      this.currentDirectoryHandle = window._directoryHandle
+    }
   }
-  public getDirectoryHandle() {
-    return this.directoryHandle
+  public getTopDirectoryHandle() {
+    return this.topDirectoryHandle
   }
-  async openDirectory(): Promise<FileSystemDirectoryHandle | null> {
+  public getCurrentDirectoryHandle() {
+    return this.currentDirectoryHandle
+  }
+  /**
+   * @description 打开目录并存储句柄到全局变量
+   */
+  public async openDirectory(): Promise<FileSystemDirectoryHandle | null> {
     try {
       // 通过 showDirectoryPicker 打开文件夹选择对话框
       const directoryHandle: FileSystemDirectoryHandle =
         await window.showDirectoryPicker()
       // console.log("Directory selected:", directoryHandle)
-      this.directoryHandle = directoryHandle
+      this.topDirectoryHandle = directoryHandle
+      this.currentDirectoryHandle = directoryHandle
+      window._directoryHandle = directoryHandle
       return directoryHandle
     } catch (error) {
       console.error("Error opening directory:", error)
       return null
     }
   }
+  public async readDirectoryAsArray(directoryHandle: FileSystemDirectoryHandle) {
+    // 递归函数来读取和处理子目录及文件
+    async function processEntry(
+      entryHandle: any,
+      idPrefix: string
+    ): Promise<any> {
+      const id = `${idPrefix}.${entryHandle.name}`
 
-  public async createNewFolder(
+      // 检查是目录还是文件
+      if (entryHandle.kind === "file") {
+        const file = await entryHandle.getFile()
+        // 这里返回文件的信息，可以根据文件类型设置 fileType
+        return {
+          id: id,
+          label: entryHandle.name,
+          // fileType 需要根据实际的文件类型来设置，这里假设全部为文件
+          fileType: "file",
+        }
+      } else if (entryHandle.kind === "directory") {
+        // 处理目录
+        const entries = []
+        for await (const [childName, childHandle] of entryHandle.entries()) {
+          // 迭代处理子目录及文件，递归调用
+          const childEntry = await processEntry(childHandle, id)
+          entries.push(childEntry)
+        }
+        return {
+          id: id,
+          label: entryHandle.name,
+          children: entries,
+          fileType: "folder", // 标记为文件夹
+        }
+      }
+    }
+
+    // 父目录的 ID 从 1 开始
+    const topLevelEntries = []
+    let prefixCounter = 1
+
+    for await (const [name, handle] of directoryHandle.entries()) {
+      // 对于每个顶级子项，调用 processEntry 并传递正确的 ID 前缀
+      const entry = await processEntry(handle, prefixCounter.toString())
+      topLevelEntries.push(entry)
+      prefixCounter++
+    }
+
+    return topLevelEntries
+  }
+
+  public async listDirectoryAsObject(directoryHandle: any) {
+    let directoryObj: any = {}
+
+    // 遍历目录中的各个条目
+    for await (const [name, handle] of directoryHandle.entries()) {
+      if (handle.kind === "file") {
+        // 如果条目是文件，则将其添加到对象中
+        directoryObj[name] = "file"
+      } else if (handle.kind === "directory") {
+        // 如果条目是目录，则递归调用listDirectoryAsObject
+        directoryObj[name] = await this.listDirectoryAsObject(handle)
+      }
+    }
+    // 返回表示目录结构的对象
+    return directoryObj
+  }
+  /**
+   * @description 检查该目录是否存在，如果存在那么设置当前目录为该目录的句柄
+   */
+  public async checkOrCreateDirectory(
     directoryHandle: FileSystemDirectoryHandle,
-    folderName: string
-  ): Promise<FileSystemDirectoryHandle | null> {
+    dirName: string
+  ) {
     try {
-      // 在选中的目录中创建新文件夹
-      const newFolderHandle: FileSystemDirectoryHandle =
-        await directoryHandle.getDirectoryHandle(folderName, { create: true })
-      console.log("Folder created:", newFolderHandle)
-      return newFolderHandle
-    } catch (error) {
-      console.error("Error creating folder:", error)
-      return null
+      // 尝试获取现有的子目录
+      const dirHandle = await directoryHandle.getDirectoryHandle(dirName)
+      // console.log("Directory already exists")
+      this.currentDirectoryHandle = dirHandle
+      return dirHandle // 目录已存在，直接返回句柄
+    } catch (err: any) {
+      if (err.name === "NotFoundError") {
+        // 目录不存在，基于create选项创建它
+        // console.log("Directory does not exist, creating...")
+        const newDirHandle = await directoryHandle.getDirectoryHandle(dirName, {
+          create: true,
+        })
+        this.currentDirectoryHandle = newDirHandle
+        return newDirHandle // 返回新创建的目录句柄
+      } else {
+        // 其他错误
+        throw err
+      }
     }
   }
 
@@ -174,7 +268,9 @@ export class FileFolderManager {
       console.error("Error renaming folder:", error)
     }
   }
-
+  /**
+   * @description 在当前目录写入文件
+   */
   public async writeFile(
     directoryHandle: FileSystemDirectoryHandle,
     fileName: string,
@@ -182,16 +278,30 @@ export class FileFolderManager {
   ): Promise<void> {
     try {
       const fileHandle = await directoryHandle.getFileHandle(fileName, {
-        create: true,
+        create: false,
       })
       const writable = await fileHandle.createWritable()
       await writable.write(content)
       await writable.close()
-      console.log(`File ${fileName} written successfully.`)
-    } catch (error) {
-      console.error("Error writing file:", error)
+      // console.log(`File ${fileName} written successfully.`)
+    } catch (error: any) {
+      // 如果文件不存在，将会抛出异常
+      if (error.name === "NotFoundError") {
+        const fileHandle = await directoryHandle.getFileHandle(fileName, {
+          create: true,
+        })
+        const writable = await fileHandle.createWritable()
+        await writable.write(content)
+        await writable.close()
+        // console.log(`File ${fileName} written successfully.`)
+      } else {
+        throw error
+      }
     }
   }
+  /**
+   * @description 以base64写入文件
+   */
   public async writeBase64ImageFile(
     directoryHandle: FileSystemDirectoryHandle,
     fileName: string,
