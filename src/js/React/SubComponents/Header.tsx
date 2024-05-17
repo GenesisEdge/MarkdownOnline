@@ -90,7 +90,7 @@ const DrawerAppBar = observer((props: Props) => {
       sx={{ textAlign: "center", height: "100%", bgcolor: "black" }}
     >
       <Typography
-        variant="h1"
+        variant="h2"
         sx={{
           fontSize: "20px",
           my: 2,
@@ -206,7 +206,7 @@ const DrawerAppBar = observer((props: Props) => {
                 textDecoration: "none",
               }}
             >
-              <h1 style={{ fontSize: "28px" }}>Markdown+ Online View</h1>
+              <h2 style={{ fontSize: "28px" }}>Markdown+ Online View</h2>
             </Typography>
             <Box
               sx={{ display: { xs: "none", sm: "flex", flexDirection: "row" } }}

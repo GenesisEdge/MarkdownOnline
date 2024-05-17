@@ -8,7 +8,7 @@ export default async () => {
 <img id="closeAboutSvg" class="closeSvg" src=${svg_1} alt="">
 </div>
 `;
-    await fetch("https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@main/source/assets/about.md")
+    await fetch("https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@main/src/assets/about.md")
         .then(async (response) => {
         aboutMd = response.text();
         if (document.getElementById("aboutMd")) {

@@ -102,23 +102,24 @@ const FileDrawer = observer(function FileDrawer() {
             <Button
               sx={{ mb: "10px" }}
               variant="contained"
+              disabled
               color="primary"
               onClick={async () => {
-                let fileFolderManager = new FileFolderManager()
-                const directoryHandle = await fileFolderManager.openDirectory()
-                if (directoryHandle) {
-                  // fileFolderManager.listDirectory(directoryHandle)
-                  // console.log(
-                  //   await fileFolderManager.listDirectoryAsObject(
-                  //     directoryHandle
-                  //   )
-                  // )
-                  setFileDirectoryArr(
-                    await fileFolderManager.readDirectoryAsArray(directoryHandle)
-                  )
-                  console.log(await fileFolderManager.readDirectoryAsArray(directoryHandle));
-                  // fileFolderManager.createNewFolder(directoryHandle, "test2")
-                }
+                // let fileFolderManager = new FileFolderManager()
+                // const directoryHandle = await fileFolderManager.openDirectory()
+                // if (directoryHandle) {
+                //   setFileDirectoryArr(
+                //     await fileFolderManager.readDirectoryAsArray(
+                //       directoryHandle
+                //     )
+                //   )
+                //   console.log(
+                //     await fileFolderManager.readDirectoryAsArray(
+                //       directoryHandle
+                //     )
+                //   )
+                //   // fileFolderManager.createNewFolder(directoryHandle, "test2")
+                // }
               }}
             >
               打开文件夹

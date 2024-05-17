@@ -22,7 +22,6 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Menu from "./SubHeader/Menu";
 import ImageManger from "./SubHeader/SubImgManager/ImageManager";
 import HomeIcon from "@mui/icons-material/Home";
 // import Stack from "@mui/material/"
@@ -33,13 +32,13 @@ import kit from "@cdn-kit";
 import MyButton from "../Components/myCom/CustomButton";
 import myPrint from "@App/export/myPrint";
 import aboutBox from "@Func/Events/aboutBox";
-// import Alert from "@mui/material/Alert"
-// Arco-Design
-// import { Message } from '@arco-design/web-react';
-import { Message } from "@arco-design/web-react";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { observer } from "mobx-react";
 import { useTheme } from "@mui/material";
 import FileDrawer from "./SubHeader/File/File";
+import alertUseArco from "@App/message/alert";
+import { Suspense } from "react";
+const LazyMenu = React.lazy(() => import("./SubHeader/Menu"));
 const runTo = (url, delay) => {
     kit.sleep(delay).then(() => {
         window.location.href = url;
@@ -60,19 +59,10 @@ const DrawerAppBar = observer((props) => {
         setMobileOpen((prevState) => !prevState);
     };
     const container = window !== undefined ? () => window().document.body : undefined;
-    const [alertState, setAlertState] = React.useState(false);
     const handleAlert = () => {
-        // setAlertState((pre) => !pre)
-        Message.info({
-            content: "此功能仍然在开发中",
-            closable: true,
-            duration: 3000,
-            position: "bottom",
-        });
+        alertUseArco("此功能仍然在开发中", 3000, { kind: "info" });
     };
-    const drawer = (
-    // <ThemeProvider theme={theme}>
-    _jsxs(Box, { onClick: handleDrawerToggle, sx: { textAlign: "center", height: "100%", bgcolor: "black" }, children: [_jsx(Typography, { variant: "h1", sx: {
+    const drawer = (_jsxs(Box, { onClick: handleDrawerToggle, sx: { textAlign: "center", height: "100%", bgcolor: "black" }, children: [_jsx(Typography, { variant: "h2", sx: {
                     fontSize: "20px",
                     my: 2,
                     color: "wheat",
@@ -106,9 +96,9 @@ const DrawerAppBar = observer((props) => {
                                     fontWeight: 700,
                                     letterSpacing: ".3rem",
                                     textDecoration: "none",
-                                }, children: _jsx("h1", { style: { fontSize: "28px" }, children: "Markdown+ Online View" }) }), _jsxs(Box, { sx: { display: { xs: "none", sm: "flex", flexDirection: "row" } }, children: [_jsx(MyButton, { href: "https://bigonion.cn", startIcon: _jsx(LinkIcon, {}), children: "\u9996\u9875" }), _jsx(MyButton, { onClick: () => {
+                                }, children: _jsx("h2", { style: { fontSize: "28px" }, children: "Markdown+ Online View" }) }), _jsxs(Box, { sx: { display: { xs: "none", sm: "flex", flexDirection: "row" } }, children: [_jsx(MyButton, { href: "https://bigonion.cn", startIcon: _jsx(LinkIcon, {}), children: "\u9996\u9875" }), _jsx(MyButton, { onClick: () => {
                                             enObj.enAboutBox ? aboutBox() : undefined;
-                                        }, startIcon: _jsx(HelpOutlineIcon, {}), children: "\u5173\u4E8E" }), _jsx(Menu, {}), _jsx(ImageManger, {}), _jsx(FileDrawer, {})] })] }) }), _jsx(Box, { sx: { display: { xs: "flex", sm: "none" } }, component: "nav", children: _jsx(Drawer, { container: container, variant: "temporary", open: mobileOpen, onClose: handleDrawerToggle, ModalProps: {
+                                        }, startIcon: _jsx(HelpOutlineIcon, {}), children: "\u5173\u4E8E" }), _jsx(Suspense, { fallback: _jsx(MyButton, { open: open, endIcon: _jsx(MoreVertIcon, {}), children: "更多" }), children: _jsx(LazyMenu, {}) }), _jsx(ImageManger, {}), _jsx(FileDrawer, {})] })] }) }), _jsx(Box, { sx: { display: { xs: "flex", sm: "none" } }, component: "nav", children: _jsx(Drawer, { container: container, variant: "temporary", open: mobileOpen, onClose: handleDrawerToggle, ModalProps: {
                             keepMounted: true, // Better open performance on mobile.
                         }, sx: {
                             display: { xs: "block", sm: "none" },

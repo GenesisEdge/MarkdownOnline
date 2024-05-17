@@ -10,9 +10,11 @@ import { useTheme } from "@mui/material/styles";
 import React from "react";
 import SwitchIOS from "@Root/js/React/Components/myCom/Switches/SwitchIOS";
 import alertUseArco from "@App/message/alert";
+import FileExplorer from "./SubFile.tsx/FileManager";
 const fileManager = new FileManager();
 let _t;
 const FileDrawer = observer(function FileDrawer() {
+    const [fileDirectoryArr, setFileDirectoryArr] = React.useState([]);
     const [editingFileName, setEditingFileName] = React.useState("");
     const theme = useTheme();
     const toggleDrawer = (newOpen) => () => {
@@ -43,7 +45,7 @@ const FileDrawer = observer(function FileDrawer() {
                     justifyContent: "center",
                     height: "100svh",
                     flexDirection: "column",
-                }, children: _jsxs(Box, { className: "FLEX COL", children: [_jsx(Typography, { children: getSettings().basic.fileEditLocal ? editingFileName : "" }), _jsx(Button, { sx: { mb: "10px" }, onClick: async () => {
+                }, children: _jsxs(Box, { className: "FLEX COL", children: [_jsx(FileExplorer, { fileDirectoryArr: fileDirectoryArr }), _jsx(Typography, { children: getSettings().basic.fileEditLocal ? editingFileName : "" }), _jsx(Button, { sx: { mb: "10px" }, onClick: async () => {
                                 try {
                                     const fileHandle = await fileManager.openSingleFile();
                                     setEditingFileName(fileHandle?.name ?? "");
@@ -64,7 +66,23 @@ const FileDrawer = observer(function FileDrawer() {
                                 catch (error) {
                                     alertUseArco("尼玛的报错乐🤣", 2000, { kind: "error" });
                                 }
-                            }, variant: "contained", color: "primary", children: "\u6253\u5F00\u6587\u4EF6" }), _jsx(Button, { sx: { mb: "10px" }, variant: "contained", onClick: () => {
+                            }, variant: "contained", color: "primary", children: "\u6253\u5F00\u6587\u4EF6" }), _jsx(Button, { sx: { mb: "10px" }, variant: "contained", disabled: true, color: "primary", onClick: async () => {
+                                // let fileFolderManager = new FileFolderManager()
+                                // const directoryHandle = await fileFolderManager.openDirectory()
+                                // if (directoryHandle) {
+                                //   setFileDirectoryArr(
+                                //     await fileFolderManager.readDirectoryAsArray(
+                                //       directoryHandle
+                                //     )
+                                //   )
+                                //   console.log(
+                                //     await fileFolderManager.readDirectoryAsArray(
+                                //       directoryHandle
+                                //     )
+                                //   )
+                                //   // fileFolderManager.createNewFolder(directoryHandle, "test2")
+                                // }
+                            }, children: "\u6253\u5F00\u6587\u4EF6\u5939" }), _jsx(Button, { sx: { mb: "10px" }, variant: "contained", onClick: () => {
                                 fileManager.saveAsFile(getMdTextFromMonaco());
                             }, children: "\u53E6\u5B58\u4E3A" }), _jsxs(Box, { className: "FLEX COW ALI-CEN", children: [_jsx(Typography, { sx: { mr: "10px", fontSize: "17px" }, color: theme.palette.info.contrastText, children: "\u540C\u6B65\u672C\u5730\u7F16\u8F91" }), _jsx(SwitchIOS, { checked: getSettings().basic.fileEditLocal, size: "small", 
                                     // value={getSettings().basic.syncScroll}

@@ -10,8 +10,7 @@ import { green, blue } from "@mui/material/colors";
 import { getTheme } from "@App/config/change";
 import { Box } from "@mui/material";
 import kit from "bigonion-kit";
-// import Box from "@mui/material/Box"
-// import TB from "@Com/myCom/Layout/TB"
+// const LazyHeader = React.lazy(() => import("./SubComponents/Header"))
 const bothStyle = {
     zIndex: { drawer: 1300, modal: 1200, appBar: 1200 },
 };
