@@ -130,9 +130,12 @@ export default function allInit(editor = window.editor, monaco = window.monaco, 
             handleCloseLoading();
         }
         await kit.sleep(110);
-        noteUseArco("已更新到最新版本", "当前版本:v2.2.0");
-        await kit.sleep(780);
-        noteUseArco("版本新增特性", `文件管理器`, {
+        noteUseArco("已更新到最新版本", "当前版本:v2.2.1");
+        await kit.sleep(680);
+        noteUseArco("当前版本新增特性", `文件管理器`, {
+            kind: "info",
+        });
+        noteUseArco("Bug修复情况", `修复增量渲染“<-”时会出现的问题`, {
             kind: "info",
         });
     });
