@@ -1,8 +1,10 @@
 import { getTheme } from "@App/config/change";
+// import { ButtonComponent } from "@Root/js/React/Components/Mui/progressButton"
 import hljs from "@cdn-hljs";
-const copyButtonStyle = `position: relative;
-top: 31px;
-left: 88%;`;
+// import { RenderRule } from "markdown-it/lib/renderer"
+// const copyButtonStyle = `position: relative;
+// top: 31px;
+// left: 88%;`
 let codePlugin = function (md) {
     const oldRender = md.renderer.rules.code_block;
     md.renderer.rules.fence = function (tokens, idx, options, env, self) {
@@ -14,6 +16,10 @@ let codePlugin = function (md) {
         }
         let language = tokens[idx].info;
         let content = tokens[idx].content;
+        /**
+         * @description 这里必须要替换，不然incremental-dom会报错
+         */
+        content = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         if (language === "mermaid") {
             if (env.mermaidParsedArr) {
                 return `<div data-line="${line}" class="language-mermaid language-plaintext">

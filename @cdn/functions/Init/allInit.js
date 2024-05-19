@@ -1,14 +1,12 @@
 import hljs from "@cdn-hljs";
 import { marked } from "@cdn-marked";
-// import { marked } from "marked"
 import mermaid from "mermaid";
 import blankTextInit from "./blankTextInit";
 import { mdConverter } from "@Root/js";
 import markdownIt from "markdown-it";
 // @ts-ignore
-import MarkdownItIncrementalDOM from "markdown-it-incremental-dom";
+import markdownItIncrementalDOM from "markdown-it-incremental-dom"; //from CDN
 import mdItMultimdTable from "markdown-it-multimd-table";
-import * as IncrementalDOM from "incremental-dom";
 // @ts-ignore
 import markdownItGithubToc from "markdown-it-github-toc";
 // @ts-ignore
@@ -61,24 +59,8 @@ export function markdownParser() {
         .use(markdownItEmoji)
         .use(markdownItLatex)
         .use(markdownItTaskLists)
-        // .use(markdownItContrainer, "spoiler", {
-        //   validate: function (params) {
-        //     return params.trim().match(/^spoiler\s+(.*)$/)
-        //   },
-        //   render: function (tokens, idx) {
-        //     var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/)
-        //     if (tokens[idx].nesting === 1) {
-        //       // opening tag
-        //       return (
-        //         "<details><summary>" + markdownIt.utils.escapeHtml(m[1]) + "</summary>\n"
-        //       )
-        //     } else {
-        //       // closing tag
-        //       return "</details>\n"
-        //     }
-        //   },
-        // })
-        .use(MarkdownItIncrementalDOM, IncrementalDOM);
+        .use(markdownItIncrementalDOM);
+    // .use(markdownItIncrementalDOM, IncrementalDOM)
     // .use(markdownItCodeCopy)
     // .use(figure)
     return markdownItParser;

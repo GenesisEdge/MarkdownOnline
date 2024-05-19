@@ -1,24 +1,18 @@
 import hljs from "@cdn-hljs"
 import { marked } from "@cdn-marked"
-// import { marked } from "marked"
 import mermaid, { MermaidConfig } from "mermaid"
 import blankTextInit from "./blankTextInit"
 import { mdConverter } from "@Root/js"
 import markdownIt from "markdown-it"
 // @ts-ignore
-import MarkdownItIncrementalDOM from "markdown-it-incremental-dom"
+import markdownItIncrementalDOM from "markdown-it-incremental-dom" //from CDN
 import mdItMultimdTable from "markdown-it-multimd-table"
-import * as IncrementalDOM from "incremental-dom"
 // @ts-ignore
 import markdownItGithubToc from "markdown-it-github-toc"
 // @ts-ignore
 import markdownItTaskLists from "markdown-it-task-lists"
 // @ts-ignore
 import { full as markdownItEmoji } from "markdown-it-emoji"
-// @ts-ignore
-import markdownItTips from "markdown-it-tips"
-// @ts-ignore
-import markdownItContrainer from "markdown-it-container"
 import kit from "@cdn-kit"
 import { Monaco } from "@monaco-editor/react"
 import { editor } from "monaco-editor"
@@ -47,7 +41,6 @@ import {
 import preViewClickEvent from "@Func/Events/click/preClick"
 import markdownItLatex from "@Func/Parser/mdItPlugin/latex"
 import { getSettings } from "@App/config/change"
-import CodePlugin from "@Plugins/code"
 import noteUseArco from "@App/message/note"
 /**
  * @description markdownParser init plugin && settings
@@ -81,27 +74,8 @@ export function markdownParser() {
     .use(markdownItEmoji)
     .use(markdownItLatex)
     .use(markdownItTaskLists)
-    // .use(markdownItContrainer, "spoiler", {
-    //   validate: function (params) {
-    //     return params.trim().match(/^spoiler\s+(.*)$/)
-    //   },
-
-    //   render: function (tokens, idx) {
-    //     var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/)
-
-    //     if (tokens[idx].nesting === 1) {
-    //       // opening tag
-    //       return (
-    //         "<details><summary>" + markdownIt.utils.escapeHtml(m[1]) + "</summary>\n"
-    //       )
-    //     } else {
-    //       // closing tag
-    //       return "</details>\n"
-    //     }
-    //   },
-    // })
-    .use(MarkdownItIncrementalDOM, IncrementalDOM)
-
+    .use(markdownItIncrementalDOM)
+  // .use(markdownItIncrementalDOM, IncrementalDOM)
   // .use(markdownItCodeCopy)
   // .use(figure)
 
@@ -184,9 +158,12 @@ export default function allInit(
       handleCloseLoading()
     }
     await kit.sleep(110)
-    noteUseArco("已更新到最新版本", "当前版本:v2.2.0")
-    await kit.sleep(780)
-    noteUseArco("版本新增特性", `文件管理器`, {
+    noteUseArco("已更新到最新版本", "当前版本:v2.2.1")
+    await kit.sleep(680)
+    noteUseArco("当前版本新增特性", `文件管理器`, {
+      kind: "info",
+    })
+    noteUseArco("Bug修复情况", `修复增量渲染“<-”时会出现的问题`, {
       kind: "info",
     })
   })

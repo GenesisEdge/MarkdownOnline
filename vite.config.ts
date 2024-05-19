@@ -9,12 +9,18 @@ export default defineConfig({
   build: {
     rollupOptions: {
       // 配置rollup的一些构建策略
-      external: ["react", "react-dom"],
+      external: [
+        "react",
+        "react-dom",
+        "markdown-it-incremental-dom",
+        "IncrementalDOM",
+      ],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          // "@mui/material": "MaterialUI",
+          "markdown-it-incremental-dom": "markdownitIncrementalDOM",
+          "incremental-dom": "IncrementalDOM",
         },
         // 控制输出
         // 在rollup里面, hash代表将你的文件名和文件内容进行组合计算得来的结果
@@ -40,7 +46,7 @@ export default defineConfig({
     assetsDir: "static", // 静态资源目录
   },
   optimizeDeps: {
-    include: ["react", "react-dom", "MaterialUI"],
+    include: ["react", "react-dom"],
   },
   resolve: {
     alias: {
@@ -62,7 +68,7 @@ export default defineConfig({
         "https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@V2.1.1/@cdn/functions/App/db.min.js",
       "@cdn-latex-map":
         "https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@main/@cdn/functions/Monaco/snippets/latexRules.min.js",
-      "markdown-it": "https://jsd.onmicrosoft.cn/npm/markdown-it@14.1.0/+esm",
+      "markdown-it": "https://jsd.onmicrosoft.cn/npm/markdown-it@8.4.2/+esm",
       "markdown-it-emoji":
         "https://jsd.onmicrosoft.cn/npm/markdown-it-emoji@3.0.0/+esm",
       "markdown-it-footnote":
@@ -71,8 +77,6 @@ export default defineConfig({
         "https://jsd.onmicrosoft.cn/npm/markdown-it-multimd-table@4.2.3/+esm",
       "markdown-it-task-lists":
         "https://jsd.onmicrosoft.cn/npm/@hackmd/markdown-it-task-lists@2.1.4/+esm",
-      "incremental-dom":
-        "https://jsd.onmicrosoft.cn/npm/incremental-dom@0.7.0/+esm",
       "markdown-it-github-toc":
         "https://jsd.onmicrosoft.cn/npm/markdown-it-github-toc@3.2.4/src/index.js/+esm",
       "@emoji-mart/data":
@@ -104,8 +108,6 @@ export default defineConfig({
       "@cdn-hljs":
         "https://npm.elemecdn.com/@highlightjs/cdn-assets@11.6.0/es/highlight.min.js",
       "@cdn-katex": "https://npm.elemecdn.com/katex@0.16.7/dist/katex.min.js",
-      // "@cdn-axios":"https://jsd.onmicrosoft.cn/npm/axios@1.6.5/index.min.js",
-      // "@cdn-katexCss":"https://npm.elemecdn.com/katex@0.16.7/dist/katex.min.css",
       "@Asset": resolve(__dirname, "./src/assets"),
       "@App": resolve(__dirname, "./src/js/functions/App/"),
       "@Func": resolve(__dirname, "./src/js/functions"),
@@ -129,7 +131,8 @@ export default defineConfig({
     viteExternalsPlugin({
       react: "React",
       "react-dom": "ReactDOM",
-      // "react-photo-view":"ReactPhotoView"
+      "markdown-it-incremental-dom": "markdownitIncrementalDOM",
+      "incremental-dom": "IncrementalDOM",
       // "@mui/material": "MaterialUI",
     }),
     [react({ jsxRuntime: "classic" })],
