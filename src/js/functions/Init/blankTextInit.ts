@@ -1,6 +1,6 @@
 import welcomeText from "@Asset/welcome.md?raw"
 // import getMdText from "@App/text/getMdText"
-import { fillInMemoryText, readMemoryText } from "@App/textMemory/memory"
+import { fillInMemoryText, readMemoryText } from "@App/memory/memory"
 // let welcomeText
 
 /**

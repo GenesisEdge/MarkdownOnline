@@ -11,10 +11,22 @@ import pageBreaker from "@Func/Parser/pageBreaker";
 import "../css/index.less";
 import { markdownParser } from "@Func/Init/allInit";
 import prepareParser from "@Func/Parser/prepareParser/prepare";
-// import PythonInWeb from "@App/python/python"
 // @ts-ignore
 // window.mermaid = mermaid
-// let pythonInWeb = new PythonInWeb(window.loadPyodide())
+// let pythonInWeb = new PythonInWeb()
+// await PythonInWeb.loadPyodide(window.loadPyodide)
+// await pythonInWeb.loadPackage()
+// // await pyodide.loadPackage()
+// await pythonInWeb.runPythonCode(`
+// import matplotlib.pyplot as plt
+// import pandas as pd
+// x = [[1.2, 2.3, 3.0, 4.5],
+//      [1.1, 2.2, 2.9, 5.0]]
+// df = pd.DataFrame(x, index=['Apple', 'Orange'])
+// df.T.boxplot()
+// plt.subplots_adjust(bottom=0.25)
+// # plt.show()
+// `)
 /**
  * @description 拓展使能配置
  */

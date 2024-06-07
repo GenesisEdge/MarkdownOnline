@@ -4,7 +4,7 @@ import {
   fillInMemoryText,
   readMemoryText,
   readMemoryImg,
-} from "@App/textMemory/memory"
+} from "@App/memory/memory"
 import { FileManager } from "./fileSystem/file"
 import { getSettings } from "./config/change"
 import alertUseArco from "./message/alert"

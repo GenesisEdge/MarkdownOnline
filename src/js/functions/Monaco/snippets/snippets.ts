@@ -426,6 +426,33 @@ sequenceDiagram
       }
     },
   })
+  monaco.languages.registerCompletionItemProvider("markdown", {
+    // triggerCharacters: [" "],
+    //@ts-ignore
+    provideCompletionItems: (model, position, context) => {
+      const textUntilPosition: string = model.getValueInRange({
+        startLineNumber: 1,
+        startColumn: 1,
+        endLineNumber: position.lineNumber,
+        endColumn: position.column,
+      })
+      if (isNeedToUseCodeIntellisense(textUntilPosition)) {
+
+        let _suggestions = [
+          {
+            label: "RED",
+            kind: monaco.languages.CompletionItemKind.Function,
+            insertText: "RED",
+            insertTextRules:
+              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+            detail: "RED...",
+          },
+        ]
+        return { suggestions: _suggestions }
+      }
+    },
+  })
+  
 }
 //
 
@@ -463,6 +490,17 @@ export function isNeedToUseClueIntellisense(textUntilPosition: string) {
   if (textUntilPosition[textUntilPosition.length - 1] === "^") {
     return true
   } else {
+    return false
+  }
+}
+
+export function isNeedToUseCodeIntellisense(textUntilPosition: string) {
+  // console.log(textUntilPosition[textUntilPosition.length-1]);
+  if (textUntilPosition.match(/\`\`\`js/g)) {
+    window.monaco.editor.setModelLanguage(window.editor.getModel(), 'javascript');
+    return true
+  } else {
+    window.monaco.editor.setModelLanguage(window.editor.getModel(), 'markdown');
     return false
   }
 }

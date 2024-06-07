@@ -6,6 +6,6 @@ export default function monacoClickEvent(
   monaco: Monaco
 ) {
   editor.onDidFocusEditorWidget(() => {
-    window.deco.clear()
+    window._deco.clear()
   })
 }

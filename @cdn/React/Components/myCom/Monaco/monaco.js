@@ -32,21 +32,21 @@ import { Backdrop, CircularProgress } from "@mui/material";
 // let ResizableBox = reactResize.ResizableBox
 const version = "0.45.0";
 const cdnDomain = {
-    unpkg: ["npm.onmicrosoft.cn", "unpkg.com"],
-    jsDelivr: ["jsd.onmicrosoft.cn", "www.jsdelivr.com", "jsd.haorwen.tk"],
+    unpkg: ["npm.onmicrosoft.cn", "unpkg.com", "npm.elemecdn.com"],
+    jsDelivr: ["jsd.onmicrosoft.cn", "www.jsdelivr.com", "cdn.jsdmirror.com"],
 };
 const cdnLinks = {
     unpkg: {
         cdn: `https://${cdnDomain.unpkg[0]}/monaco-editor@${version}/dev/vs`,
     },
     jsDelivr: {
-        cdn: `https://${cdnDomain.jsDelivr[0]}/npm/monaco-editor@${version}/dev/vs`,
+        cdn: `https://${cdnDomain.jsDelivr[2]}/npm/monaco-editor@${version}/dev/vs`,
     },
 };
 try {
     loader.config({
         paths: {
-            vs: cdnLinks.unpkg.cdn,
+            vs: cdnLinks.jsDelivr.cdn,
         },
     });
 }
@@ -58,14 +58,14 @@ catch (error) {
     });
 }
 const files = {
+    "index.py": {
+        name: "index.py",
+        language: "python",
+        value: "",
+    },
     "index.js": {
         name: "index.js",
         language: "javascript",
-        value: "nihao",
-    },
-    "style.css": {
-        name: "style.css",
-        language: "css",
         value: "nihao",
     },
     "index.md": {
@@ -116,6 +116,7 @@ export default observer(function MonacoEditor() {
     });
     const [fileName, setFileName] = useState("index.md");
     // let previousValue = window.editor.getValue();
+    // window.setFileName = setFileName
     const file = files[fileName];
     // const editorRef = useRef(null)
     function handleOnChange(e) {

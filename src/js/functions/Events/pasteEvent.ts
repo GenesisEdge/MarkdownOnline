@@ -7,7 +7,7 @@ import {
   fillInMemoryImg,
   fillInMemoryImgs,
   readMemoryImg,
-} from "@App/textMemory/memory"
+} from "@App/memory/memory"
 // import { editor } from "monaco-editor"
 
 /**
@@ -69,7 +69,7 @@ export default function pasteEvent() {
 function handlePasteEvent(e: ClipboardEvent) {
   return new Promise((resolve) => {
     // 获取剪贴板
-    let clipboardData = e.clipboardData || window.clipboardData
+    let clipboardData = e.clipboardData!
     let items = clipboardData.items
     const itemsLength = items.length
     let imageBase64Arr: any = []
@@ -78,7 +78,7 @@ function handlePasteEvent(e: ClipboardEvent) {
       if (item.kind == "file") {
         e.preventDefault()
         e.stopPropagation()
-        let pasteFile = item.getAsFile()
+        let pasteFile = item.getAsFile()!
         let reader = new FileReader()
         reader.onload = function (event) {
           imageBase64Arr.push(event.target!.result)
@@ -98,7 +98,7 @@ function handlePasteEvent(e: ClipboardEvent) {
           fileType === "svg"
         ) {
           reader.readAsDataURL(pasteFile)
-        } 
+        }
       } else {
         resolve([])
       }

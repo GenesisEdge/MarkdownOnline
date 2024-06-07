@@ -2,7 +2,7 @@
  * @deprecated now
 */
 import regs from "@App/regs/regs"
-import { readMemoryImg } from "@App/textMemory/memory"
+import { readMemoryImg } from "@App/memory/memory"
 import hljs from "@cdn-hljs"
 // import { marked } from "@cdn-marked"
 import { emojify, has } from "@cdn-node-emoji"

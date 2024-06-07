@@ -1,4 +1,4 @@
-import { readMemoryImg } from "@Func/App/textMemory/memory"
+import { readMemoryImg } from "@App/memory/memory"
 import replaceAsync from "string-replace-async"
 /**
  * @description VFS

@@ -142,7 +142,7 @@ export default function allInit(editor = window.editor, monaco = window.monaco, 
     /**
      * @description 全局变量初始化
      */
-    window.deco = editor.createDecorationsCollection();
+    window._deco = editor.createDecorationsCollection();
     window._speechData = {
         processing: false,
         speechResult: "",
@@ -151,7 +151,7 @@ export default function allInit(editor = window.editor, monaco = window.monaco, 
     /**
      * @description 全局事件初始化
      */
-    preViewClickEvent(editor, monaco, window.deco);
+    preViewClickEvent(editor, monaco, window._deco);
     // kit.sleep(5000).then(() => {
     // const codePlugin = new CodePlugin()
     // codePlugin.addButtonsToCodeBlocks()

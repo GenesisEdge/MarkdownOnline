@@ -1,5 +1,5 @@
 import { getMdTextFromMonaco } from "@App/text/getMdText";
-import { fillInMemoryText, readMemoryText, } from "@App/textMemory/memory";
+import { fillInMemoryText, readMemoryText, } from "@App/memory/memory";
 import { FileManager } from "./fileSystem/file";
 import { getSettings } from "./config/change";
 import alertUseArco from "./message/alert";

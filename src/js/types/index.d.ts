@@ -204,15 +204,13 @@ declare module "*index.js" {
 }
 
 declare interface Window {
-  clipboardData: any
   editor: any
   monaco: any
-  theme: string
-  location: any
-  deco: any
   katex: any
   mermaid: any
   loadPyodide: any
+  _deco: any
+  _prepareCacheData:IPrePare
   _speechData: {
     processing: Boolean
     speechResult: string

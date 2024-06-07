@@ -8,3 +8,4 @@ export declare function monacoSnippets(editor: editor.IStandaloneCodeEditor, mon
 export declare function isNeedToUseLatexIntellisense(textUntilPosition: string): boolean;
 export declare function isInLatexBlock(textUntilPosition: string): boolean;
 export declare function isNeedToUseClueIntellisense(textUntilPosition: string): boolean;
+export declare function isNeedToUseCodeIntellisense(textUntilPosition: string): boolean;

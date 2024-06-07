@@ -50,61 +50,55 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      // "react":"https://esm.sh/react",
-      // "uslug":"https://jsd.onmicrosoft.cn/npm/uslug@1.0.4/+esm",
-      // htmlparser2: "https://jsd.onmicrosoft.cn/npm/htmlparser2@9.1.0/+esm",
-      // "react-resizable":"https://cdn.jsdelivr.net/npm/react-resizable@3.0.5",
-      // "@zenfs/dom":"https://cdn.jsdelivr.net/npm/@zenfs/dom@0.2.7/dist/index.js",
-      // "@zenfs/core":"https://cdn.jsdelivr.net/npm/@zenfs/core@0.10.0/dist/index.js",
       "react-photo-view":
-        "https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@V2.1.3/@cdn/lib/react-photo-view/react-photo-view.module.js",
+        "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@V2.1.3/@cdn/lib/react-photo-view/react-photo-view.module.js",
       "@arco-design/web-react":
-        "https://jsd.onmicrosoft.cn/npm/@arco-design/web-react@2.62.0/+esm",
+        "https://cdn.jsdmirror.com/npm/@arco-design/web-react@2.62.0/+esm",
       "@cdn-emoji-data":
-        "https://jsd.onmicrosoft.cn/npm/@emoji-mart/data@1.2.1/+esm",
+        "https://cdn.jsdmirror.com/npm/@emoji-mart/data@1.2.1/+esm",
       "@cdn-Readme":
-        "https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@V2.1.1/README.md",
+        "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@V2.1.1/README.md",
       "@cdn-indexedDb-lib":
-        "https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@V2.1.1/@cdn/functions/App/db.min.js",
+        "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@V2.1.1/@cdn/functions/App/db.min.js",
       "@cdn-latex-map":
-        "https://jsd.onmicrosoft.cn/gh/LiWeny16/MarkdownOnline@main/@cdn/functions/Monaco/snippets/latexRules.min.js",
-      "markdown-it": "https://jsd.onmicrosoft.cn/npm/markdown-it@8.4.2/+esm",
+        "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@main/@cdn/functions/Monaco/snippets/latexRules.min.js",
+      "markdown-it": "https://cdn.jsdmirror.com/npm/markdown-it@8.4.2/+esm",
       "markdown-it-emoji":
-        "https://jsd.onmicrosoft.cn/npm/markdown-it-emoji@3.0.0/+esm",
+        "https://cdn.jsdmirror.com/npm/markdown-it-emoji@3.0.0/+esm",
       "markdown-it-footnote":
-        "https://jsd.onmicrosoft.cn/npm/markdown-it-footnote@4.0.0/+esm",
+        "https://cdn.jsdmirror.com/npm/markdown-it-footnote@4.0.0/+esm",
       "markdown-it-multimd-table":
-        "https://jsd.onmicrosoft.cn/npm/markdown-it-multimd-table@4.2.3/+esm",
+        "https://cdn.jsdmirror.com/npm/markdown-it-multimd-table@4.2.3/+esm",
       "markdown-it-task-lists":
-        "https://jsd.onmicrosoft.cn/npm/@hackmd/markdown-it-task-lists@2.1.4/+esm",
+        "https://cdn.jsdmirror.com/npm/@hackmd/markdown-it-task-lists@2.1.4/+esm",
       "markdown-it-github-toc":
-        "https://jsd.onmicrosoft.cn/npm/markdown-it-github-toc@3.2.4/src/index.js/+esm",
+        "https://cdn.jsdmirror.com/npm/markdown-it-github-toc@3.2.4/src/index.js/+esm",
       "@emoji-mart/data":
-        "https://jsd.onmicrosoft.cn/npm/@emoji-mart/data@1.1.2/+esm",
-      "emoji-mart": "https://jsd.onmicrosoft.cn/npm/emoji-mart@5.6.0/+esm",
-      gsap: "https://jsd.onmicrosoft.cn/npm/gsap@3.12.5/+esm",
-      "@cdn-emojilib": "https://jsd.onmicrosoft.cn/npm/emojilib@3.0.11/+esm",
-      "@cdn-prettier": "https://jsd.onmicrosoft.cn/npm/prettier@3.2.4/+esm",
+        "https://cdn.jsdmirror.com/npm/@emoji-mart/data@1.1.2/+esm",
+      "emoji-mart": "https://cdn.jsdmirror.com/npm/emoji-mart@5.6.0/+esm",
+      gsap: "https://cdn.jsdmirror.com/npm/gsap@3.12.5/+esm",
+      "@cdn-emojilib": "https://cdn.jsdmirror.com/npm/emojilib@3.0.11/+esm",
+      "@cdn-prettier": "https://cdn.jsdmirror.com/npm/prettier@3.2.4/+esm",
       "@cdn-prettier-plugins-markdown":
-        "https://jsd.onmicrosoft.cn/npm/prettier@3.2.4/plugins/markdown.js/+esm",
-      vconsole: "https://jsd.onmicrosoft.cn/npm/vconsole@3.15.1/+esm",
+        "https://cdn.jsdmirror.com/npm/prettier@3.2.4/plugins/markdown.js/+esm",
+      vconsole: "https://cdn.jsdmirror.com/npm/vconsole@3.15.1/+esm",
       "string-replace-async":
-        "https://jsd.onmicrosoft.cn/npm/string-replace-async@3.0.2/index.min.js",
-      html2canvas: "https://jsd.onmicrosoft.cn/npm/html2canvas@1.4.1/+esm",
-      mobx: "https://jsd.onmicrosoft.cn/npm/mobx@6.12.0/+esm",
+        "https://cdn.jsdmirror.com/npm/string-replace-async@3.0.2/index.min.js",
+      html2canvas: "https://cdn.jsdmirror.com/npm/html2canvas@1.4.1/+esm",
+      mobx: "https://cdn.jsdmirror.com/npm/mobx@6.12.0/+esm",
       // "mobx-react-lite":"https://cdn.jsdelivr.net/npm/mobx-react-lite@4.0.7/dist/mobxreactlite.esm.js",
-      // "mobx-react":"https://jsd.onmicrosoft.cn/npm/mobx-react@9.1.1/dist/mobxreact.esm.js",
-      axios: "https://jsd.onmicrosoft.cn/npm/axios@1.6.5/+esm",
-      "@cdn-node-emoji": "https://jsd.onmicrosoft.cn/npm/node-emoji@2.1.3/+esm",
+      // "mobx-react":"https://cdn.jsdmirror.com/npm/mobx-react@9.1.1/dist/mobxreact.esm.js",
+      axios: "https://cdn.jsdmirror.com/npm/axios@1.6.5/+esm",
+      "@cdn-node-emoji": "https://cdn.jsdmirror.com/npm/node-emoji@2.1.3/+esm",
       "@cdn-marked": "https://npm.elemecdn.com/marked/lib/marked.esm.js",
       mermaid:
-        "https://jsd.onmicrosoft.cn/npm/mermaid@10/dist/mermaid.esm.min.mjs",
+        "https://cdn.jsdmirror.com/npm/mermaid@10/dist/mermaid.esm.min.mjs",
       "@cdn-mermaid":
-        "https://jsd.onmicrosoft.cn/npm/mermaid@10/dist/mermaid.esm.min.mjs",
+        "https://cdn.jsdmirror.com/npm/mermaid@10/dist/mermaid.esm.min.mjs",
       "bigonion-kit":
-        "https://jsd.onmicrosoft.cn/npm/bigonion-kit@0.12.3/esm/kit.min.js",
+        "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js",
       "@cdn-kit":
-        "https://jsd.onmicrosoft.cn/npm/bigonion-kit@0.12.3/esm/kit.min.js",
+        "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js",
       "@cdn-hljs":
         "https://npm.elemecdn.com/@highlightjs/cdn-assets@11.6.0/es/highlight.min.js",
       "@cdn-katex": "https://npm.elemecdn.com/katex@0.16.7/dist/katex.min.js",
@@ -116,8 +110,8 @@ export default defineConfig({
       "@Mobx": resolve(__dirname, "./src/js/React/Mobx"),
       "@Css": resolve(__dirname, "./src/css"),
       "@Plugins": resolve(__dirname, "./src/js/functions/Plugins"),
-      // "@arco-design/web-react":"https://jsd.onmicrosoft.cn/npm/@arco-design/web-react@2.59.0/dist/arco.min.js"
-      // "mobx":"https://jsd.onmicrosoft.cn/npm/mobx-react@9.1.0/dist/mobxreact.esm.js"
+      // "@arco-design/web-react":"https://cdn.jsdmirror.com/npm/@arco-design/web-react@2.59.0/dist/arco.min.js"
+      // "mobx":"https://cdn.jsdmirror.com/npm/mobx-react@9.1.0/dist/mobxreact.esm.js"
     },
   },
   server: {

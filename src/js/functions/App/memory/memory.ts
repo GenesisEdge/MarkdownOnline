@@ -1,9 +1,6 @@
 import {
   openDB,
-  getDataByIndex,
   cursorGetDataByIndex,
-  addData,
-  getDataByKey,
   cursorGetData,
   updateDB,
 } from "@cdn-indexedDb-lib"

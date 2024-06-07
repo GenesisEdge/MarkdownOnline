@@ -1,5 +1,5 @@
 import insertTextAtCursor, { insertTextMonacoAtCursor, } from "@App/text/insertTextAtCursor";
-import { fillInMemoryImg, fillInMemoryImgs, } from "@App/textMemory/memory";
+import { fillInMemoryImg, fillInMemoryImgs, } from "@App/memory/memory";
 // import { editor } from "monaco-editor"
 /**
  * @description handle native event
@@ -47,7 +47,7 @@ export default function pasteEvent() {
 function handlePasteEvent(e) {
     return new Promise((resolve) => {
         // 获取剪贴板
-        let clipboardData = e.clipboardData || window.clipboardData;
+        let clipboardData = e.clipboardData;
         let items = clipboardData.items;
         const itemsLength = items.length;
         let imageBase64Arr = [];
