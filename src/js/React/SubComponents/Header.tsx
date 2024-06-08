@@ -1,8 +1,7 @@
 import * as React from "react"
 import AppBar from "@mui/material/AppBar"
-import { Box, ThemeProvider, createTheme } from "@mui/material/"
+import { Box } from "@mui/material/"
 import CssBaseline from "@mui/material/CssBaseline"
-import Divider from "@mui/material/Divider"
 import Drawer from "@mui/material/Drawer"
 import IconButton from "@mui/material/IconButton"
 import InfoIcon from "@mui/icons-material/Info"
@@ -16,34 +15,24 @@ import Avatar from "@mui/material/Avatar"
 import ImageIcon from "@mui/icons-material/Image"
 import LinkIcon from "@mui/icons-material/Link"
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline"
-// import WorkIcon from "@mui/icons-material/Work"
 import EditNoteIcon from "@mui/icons-material/EditNote"
-// import BeachAccessIcon from "@mui/icons-material/BeachAccess"
 import MenuIcon from "@mui/icons-material/Menu"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
-// import Button from "@mui/material/Button"
-import { grey, lime, purple } from "@mui/material/colors"
 import ImageManger from "./SubHeader/SubImgManager/ImageManager"
 import HomeIcon from "@mui/icons-material/Home"
-// import Stack from "@mui/material/"
-// import { alpha, styled } from "@mui/material/styles"
-// import Paper from "@mui/material/Paper"
 import { enObj } from "@Root/js/index"
 import kit from "@cdn-kit"
 import MyButton from "../Components/myCom/CustomButton"
 import myPrint from "@App/export/myPrint"
 import aboutBox from "@Func/Events/aboutBox"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
-import { Message } from "@arco-design/web-react"
-import { useImage } from "@Root/js/React/Mobx/Image"
 import { observer } from "mobx-react"
 import { useTheme } from "@mui/material"
 import FileDrawer from "./SubHeader/File/File"
 import alertUseArco from "@App/message/alert"
-import Menu from "./SubHeader/Menu"
 import { Suspense } from "react"
-
+import mdIcon from "@Asset/img/mdIcon.svg"
 const LazyMenu = React.lazy(() => import("./SubHeader/Menu"))
 
 interface Props {
@@ -200,8 +189,7 @@ const DrawerAppBar = observer((props: Props) => {
                   theme.palette.mode === "light"
                     ? theme.palette.primary.contrastText
                     : theme.palette.secondary.contrastText,
-                fontFamily: "monospace",
-                fontWeight: 700,
+                fontFamily: "emoji",
                 letterSpacing: ".3rem",
                 textDecoration: "none",
               }}

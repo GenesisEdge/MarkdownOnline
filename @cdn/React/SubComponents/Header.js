@@ -16,17 +16,12 @@ import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
 import LinkIcon from "@mui/icons-material/Link";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-// import WorkIcon from "@mui/icons-material/Work"
 import EditNoteIcon from "@mui/icons-material/EditNote";
-// import BeachAccessIcon from "@mui/icons-material/BeachAccess"
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ImageManger from "./SubHeader/SubImgManager/ImageManager";
 import HomeIcon from "@mui/icons-material/Home";
-// import Stack from "@mui/material/"
-// import { alpha, styled } from "@mui/material/styles"
-// import Paper from "@mui/material/Paper"
 import { enObj } from "@Root/js/index";
 import kit from "@cdn-kit";
 import MyButton from "../Components/myCom/CustomButton";
@@ -92,8 +87,7 @@ const DrawerAppBar = observer((props) => {
                                     color: theme.palette.mode === "light"
                                         ? theme.palette.primary.contrastText
                                         : theme.palette.secondary.contrastText,
-                                    fontFamily: "monospace",
-                                    fontWeight: 700,
+                                    fontFamily: "emoji",
                                     letterSpacing: ".3rem",
                                     textDecoration: "none",
                                 }, children: _jsx("h2", { style: { fontSize: "28px" }, children: "Markdown+ Online View" }) }), _jsxs(Box, { sx: { display: { xs: "none", sm: "flex", flexDirection: "row" } }, children: [_jsx(MyButton, { href: "https://bigonion.cn", startIcon: _jsx(LinkIcon, {}), children: "\u9996\u9875" }), _jsx(MyButton, { onClick: () => {
