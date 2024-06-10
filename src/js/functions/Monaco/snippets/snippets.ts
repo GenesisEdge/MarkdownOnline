@@ -40,7 +40,7 @@ import {
   debugging0,
   envs,
 } from "@cdn-latex-map"
-
+import { type Position } from "monaco-editor/esm/vs/editor/editor.api"
 // import emojilib from "@cdn-emojilib"
 export function monacoSnippets(
   editor: editor.IStandaloneCodeEditor,
@@ -52,7 +52,7 @@ export function monacoSnippets(
    */
   monaco.languages.registerCompletionItemProvider("markdown", {
     triggerCharacters: ["/"],
-    //@ts-ignore
+
     provideCompletionItems: (model, position, context) => {
       const textUntilPosition: string = model.getValueInRange({
         startLineNumber: 1,
@@ -281,7 +281,6 @@ sequenceDiagram
     triggerCharacters: ["\\"],
     //@ts-ignore
     provideCompletionItems: (model, position, context) => {
-      // console.log(context)
       const textUntilPosition: string = model.getValueInRange({
         startLineNumber: 1,
         startColumn: 1,
@@ -289,7 +288,9 @@ sequenceDiagram
         endColumn: position.column,
       })
       // 类似的，如果是在一个 LaTeX 代码块中，返回 LaTeX 的提示。
-      if (isNeedToUseLatexIntellisense(textUntilPosition)) {
+      if (
+        isNeedToUseLatexIntellisense(monaco, model, textUntilPosition, position)
+      ) {
         const suggestions = Array.from(
           [
             ...delimiters0,
@@ -437,7 +438,6 @@ sequenceDiagram
         endColumn: position.column,
       })
       if (isNeedToUseCodeIntellisense(textUntilPosition)) {
-
         let _suggestions = [
           {
             label: "RED",
@@ -452,7 +452,6 @@ sequenceDiagram
       }
     },
   })
-  
 }
 //
 
@@ -461,12 +460,15 @@ sequenceDiagram
  * @param textUntilPosition string
  */
 export function isNeedToUseLatexIntellisense(
-  textUntilPosition: string
+  monaco: Monaco,
+  model: editor.ITextModel,
+  textUntilPosition: string,
+  position: Position
 ): boolean {
-  // console.log(textUntilPosition[textUntilPosition.length - 1]);
   if (
     textUntilPosition[textUntilPosition.length - 1] === "\\" &&
-    isInLatexBlock(textUntilPosition)
+    (isInLatexBlock(textUntilPosition) ||
+      isInLatexInline(model, position, textUntilPosition))
   ) {
     return true
   } else {
@@ -475,16 +477,36 @@ export function isNeedToUseLatexIntellisense(
 }
 
 export function isInLatexBlock(textUntilPosition: string): boolean {
-  return (
-    (textUntilPosition.match(/\$\$/g)
-      ? textUntilPosition.match(/\$\$/g)!.length % 2 === 1
-      : false) ||
-    (textUntilPosition.match(/\$/g)
-      ? textUntilPosition.match(/\$/g)!.length % 2 === 1
-      : false)
-  )
+  return textUntilPosition.match(/\$\$/g)
+    ? textUntilPosition.match(/\$\$/g)!.length % 2 === 1
+    : false
 }
+export function isInLatexInline(
+  model: editor.ITextModel,
+  position: Position,
+  textUntilPosition: string
+): boolean {
+  const lineContent = model.getLineContent(position.lineNumber)
+  const regex = /\$(?!\s)((\\\$|[^\$\n])*?)(?<!\s)\$/g
+  if (lineContent.match(regex)) {
+    const line = lineContent
+    const position = window.editor.getPosition()
+    const cursorOffset = position.column - 1
+    const matches = []
+    let match
 
+    while ((match = regex.exec(line)) !== null) {
+      const startIndex = match.index + 1
+      const endIndex = regex.lastIndex - 1
+      matches.push({ startIndex, endIndex })
+    }
+    const isInRange = matches.some((match) => {
+      return cursorOffset > match.startIndex && cursorOffset <= match.endIndex
+    })
+    // console.log(matches,cursorOffset)
+    return isInRange
+  } else return false
+}
 export function isNeedToUseClueIntellisense(textUntilPosition: string) {
   // console.log(textUntilPosition[textUntilPosition.length-1]);
   if (textUntilPosition[textUntilPosition.length - 1] === "^") {
@@ -497,10 +519,13 @@ export function isNeedToUseClueIntellisense(textUntilPosition: string) {
 export function isNeedToUseCodeIntellisense(textUntilPosition: string) {
   // console.log(textUntilPosition[textUntilPosition.length-1]);
   if (textUntilPosition.match(/\`\`\`js/g)) {
-    window.monaco.editor.setModelLanguage(window.editor.getModel(), 'javascript');
+    window.monaco.editor.setModelLanguage(
+      window.editor.getModel(),
+      "javascript"
+    )
     return true
   } else {
-    window.monaco.editor.setModelLanguage(window.editor.getModel(), 'markdown');
+    window.monaco.editor.setModelLanguage(window.editor.getModel(), "markdown")
     return false
   }
 }

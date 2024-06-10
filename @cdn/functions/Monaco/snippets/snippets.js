@@ -7,7 +7,6 @@ export function monacoSnippets(editor, monaco) {
      */
     monaco.languages.registerCompletionItemProvider("markdown", {
         triggerCharacters: ["/"],
-        //@ts-ignore
         provideCompletionItems: (model, position, context) => {
             const textUntilPosition = model.getValueInRange({
                 startLineNumber: 1,
@@ -222,7 +221,6 @@ sequenceDiagram
         triggerCharacters: ["\\"],
         //@ts-ignore
         provideCompletionItems: (model, position, context) => {
-            // console.log(context)
             const textUntilPosition = model.getValueInRange({
                 startLineNumber: 1,
                 startColumn: 1,
@@ -230,7 +228,7 @@ sequenceDiagram
                 endColumn: position.column,
             });
             // 类似的，如果是在一个 LaTeX 代码块中，返回 LaTeX 的提示。
-            if (isNeedToUseLatexIntellisense(textUntilPosition)) {
+            if (isNeedToUseLatexIntellisense(monaco, model, textUntilPosition, position)) {
                 const suggestions = Array.from([
                     ...delimiters0,
                     ...delimeterSizing0,
@@ -381,10 +379,10 @@ sequenceDiagram
  * @description 判断是否需要启用LaTex提示
  * @param textUntilPosition string
  */
-export function isNeedToUseLatexIntellisense(textUntilPosition) {
-    // console.log(textUntilPosition[textUntilPosition.length - 1]);
+export function isNeedToUseLatexIntellisense(monaco, model, textUntilPosition, position) {
     if (textUntilPosition[textUntilPosition.length - 1] === "\\" &&
-        isInLatexBlock(textUntilPosition)) {
+        (isInLatexBlock(textUntilPosition) ||
+            isInLatexInline(model, position, textUntilPosition))) {
         return true;
     }
     else {
@@ -392,12 +390,32 @@ export function isNeedToUseLatexIntellisense(textUntilPosition) {
     }
 }
 export function isInLatexBlock(textUntilPosition) {
-    return ((textUntilPosition.match(/\$\$/g)
+    return textUntilPosition.match(/\$\$/g)
         ? textUntilPosition.match(/\$\$/g).length % 2 === 1
-        : false) ||
-        (textUntilPosition.match(/\$/g)
-            ? textUntilPosition.match(/\$/g).length % 2 === 1
-            : false));
+        : false;
+}
+export function isInLatexInline(model, position, textUntilPosition) {
+    const lineContent = model.getLineContent(position.lineNumber);
+    const regex = /\$(?!\s)((\\\$|[^\$\n])*?)(?<!\s)\$/g;
+    if (lineContent.match(regex)) {
+        const line = lineContent;
+        const position = window.editor.getPosition();
+        const cursorOffset = position.column - 1;
+        const matches = [];
+        let match;
+        while ((match = regex.exec(line)) !== null) {
+            const startIndex = match.index + 1;
+            const endIndex = regex.lastIndex - 1;
+            matches.push({ startIndex, endIndex });
+        }
+        const isInRange = matches.some((match) => {
+            return cursorOffset > match.startIndex && cursorOffset <= match.endIndex;
+        });
+        // console.log(matches,cursorOffset)
+        return isInRange;
+    }
+    else
+        return false;
 }
 export function isNeedToUseClueIntellisense(textUntilPosition) {
     // console.log(textUntilPosition[textUntilPosition.length-1]);
@@ -411,11 +429,11 @@ export function isNeedToUseClueIntellisense(textUntilPosition) {
 export function isNeedToUseCodeIntellisense(textUntilPosition) {
     // console.log(textUntilPosition[textUntilPosition.length-1]);
     if (textUntilPosition.match(/\`\`\`js/g)) {
-        window.monaco.editor.setModelLanguage(window.editor.getModel(), 'javascript');
+        window.monaco.editor.setModelLanguage(window.editor.getModel(), "javascript");
         return true;
     }
     else {
-        window.monaco.editor.setModelLanguage(window.editor.getModel(), 'markdown');
+        window.monaco.editor.setModelLanguage(window.editor.getModel(), "markdown");
         return false;
     }
 }
