@@ -4,6 +4,11 @@ import react from "@vitejs/plugin-react"
 import cdn from "vite-plugin-cdn-import"
 import { viteExternalsPlugin } from "vite-plugin-externals"
 import { resolve } from "path"
+import retryImportPlugin from "./vite/plugins/cdn.config"
+import dynamicImport from 'vite-plugin-dynamic-import'
+// 然后在你的 vite.config.js 中引入这个插件
+// import importRetryPlugin from "./vite/plugins/cdn.config"
+
 export default defineConfig({
   base: "./",
   build: {
@@ -95,8 +100,7 @@ export default defineConfig({
         "https://cdn.jsdmirror.com/npm/mermaid@10/dist/mermaid.esm.min.mjs",
       "@cdn-mermaid":
         "https://cdn.jsdmirror.com/npm/mermaid@10/dist/mermaid.esm.min.mjs",
-      "bigonion-kit":
-        "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js",
+
       "@cdn-kit":
         "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js",
       "@cdn-hljs":
@@ -127,8 +131,9 @@ export default defineConfig({
       "react-dom": "ReactDOM",
       "markdown-it-incremental-dom": "markdownitIncrementalDOM",
       "incremental-dom": "IncrementalDOM",
-      // "@mui/material": "MaterialUI",
     }),
     [react({ jsxRuntime: "classic" })],
+    dynamicImport(/* options */),
+    retryImportPlugin(),
   ],
 })

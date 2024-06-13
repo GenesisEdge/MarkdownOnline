@@ -172,7 +172,7 @@ export default function allInit(
    * @description 全局变量初始化
    */
   window._deco = editor.createDecorationsCollection()
-
+  // window.rImport = importModule
   window._speechData = {
     processing: false,
     speechResult: "",

@@ -10,10 +10,14 @@ import CssBaseline from "@mui/material/CssBaseline"
 import { orange, green, grey, common, blue, pink } from "@mui/material/colors"
 import { getTheme } from "@App/config/change"
 import { Backdrop, Box, CircularProgress } from "@mui/material"
+// import importModule from "@App/import/importModule"
 import kit from "bigonion-kit"
 
+// const kit = await importModule([
+//   "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js",
+//   "https://cdn.jsdelivr.net/npm/bigonion-kit@0.12.3/esm/kit.min.js",
+// ])
 // const LazyHeader = React.lazy(() => import("./SubComponents/Header"))
-
 const bothStyle: ThemeOptions = {
   zIndex: { drawer: 1300, modal: 1200, appBar: 1200 },
 }
