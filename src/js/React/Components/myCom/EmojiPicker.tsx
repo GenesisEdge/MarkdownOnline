@@ -2,22 +2,15 @@ import data from "@emoji-mart/data"
 import Picker from "@emoji-mart/react"
 import { Backdrop, Box } from "@mui/material"
 import React from "react"
-// @ts-ignore
-// import { useGSAP } from "https://cdn.jsdelivr.net/npm/@gsap/react@2.1.0/+esm"
-import { useGSAP } from "@gsap/react"
 import { observer } from "mobx-react"
-// @ts-ignore
+
 import { gsap } from "gsap"
+
 import { insertTextMonacoAtCursor } from "@App/text/insertTextAtCursor"
 import {
   changeEmojiPickerState,
   getContextMenuClickPosition,
-  getEmojiPickerState,
 } from "@App/config/change"
-// import { isElementOverflow } from "@App/user/layout"
-// or
-// import { Fade } from "@mui/material"
-// import { Zoom } from "@mui/material"
 export default observer(function EmojiPicker(props: any) {
   const pickerHeight = 435
   const pickerWidth = 352
@@ -34,7 +27,7 @@ export default observer(function EmojiPicker(props: any) {
     // )
     // 如果超过加起来超过可视范围，则向上翻转
     if (_position.posy + pickerHeight > window.document.body.clientHeight) {
-      _position.posy = window.document.body.clientHeight-pickerHeight
+      _position.posy = window.document.body.clientHeight - pickerHeight
       return _position
     }
     return _position

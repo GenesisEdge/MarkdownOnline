@@ -2,11 +2,8 @@
 // import MarkdownItIncrementalDOM from "markdown-it-incremental-dom"
 import * as IncrementalDOM from "incremental-dom";
 import hljs from "@cdn-hljs";
-import "@cdn-katex";
-// import {katex} from "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"
-// import replaceAsync from "string-replace-async"
+// import "@cdn-katex"
 import { getMdTextFromMonaco } from "@App/text/getMdText";
-// import { fillInMemoryImg, readMemoryImg } from "@App/textMemory/memory"
 import pageBreaker from "@Func/Parser/pageBreaker";
 import "../css/index.less";
 import { markdownParser } from "@Func/Init/allInit";

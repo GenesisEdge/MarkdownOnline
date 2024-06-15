@@ -152,10 +152,6 @@ export default function allInit(editor = window.editor, monaco = window.monaco, 
      * @description 全局事件初始化
      */
     preViewClickEvent(editor, monaco, window._deco);
-    // kit.sleep(5000).then(() => {
-    // const codePlugin = new CodePlugin()
-    // codePlugin.addButtonsToCodeBlocks()
-    // })
 }
 // #region ********************config region***************************
 const defaultConfig = {

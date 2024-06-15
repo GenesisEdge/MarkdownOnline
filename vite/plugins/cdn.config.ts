@@ -1,10 +1,17 @@
 import MagicString from "magic-string"
 
-function transformImportPlugin() {
+/**
+ * @description 处理import重载的插件
+ */
+function transformImportPlugin(libMaps) {
   return {
     name: "vite-plugin-transform-import",
-    async transform(code, id) {
-      if (id.endsWith("App.tsx")) {
+    async transform(code: string, id: string) {
+      if (
+        !id.includes("src/js/functions/Events/error/script.ts") &&
+        !id.includes("importModule.ts") &&
+        (id.endsWith(".ts") || id.endsWith(".tsx"))
+      ) {
         const ast = this.parse(code, {
           sourceType: "module",
           plugins: ["typescript", "jsx"],
@@ -19,10 +26,9 @@ function transformImportPlugin() {
         for (const node of ast.body) {
           if (node.type === "ImportDeclaration") {
             lastImportEnd = node.end
-            console.log(node.source.value)
+            // console.log(node.source.value)
             if (node.source.value === "@App/import/importModule") {
               hasImportModule = true
-              console.log(true);
               break
             }
           }
@@ -38,23 +44,48 @@ function transformImportPlugin() {
         for (const node of ast.body) {
           if (
             node.type === "ImportDeclaration" &&
-            node.source.value === "bigonion-kit"
+            Object.keys(libMaps).includes(node.source.value)
           ) {
             const specifiers = node.specifiers
-            for (const specifier of specifiers) {
-              if (specifier.type === "ImportDefaultSpecifier") {
-                const importStart = node.start
-                const importEnd = node.end
-                const importName = specifier.local.name
+            let transformedCode = ""
 
-                const newCode = `
-const ${importName} = await importModule([
-  "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js", 
-  "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js"
-]);`
+            if (specifiers.length) {
+              Object.values(specifiers).forEach((specifier: any, index) => {
+                if (specifier.type === "ImportDefaultSpecifier") {
+                  // 处理默认导入
+                  const importStart = node.start
+                  const importEnd = node.end
+                  const importName = specifier.local.name
 
-                magicString.overwrite(importStart, importEnd, newCode)
-              }
+                  const newCode = `
+  const ${importName} = (await importModule("${libMaps[node.source.value]}")).default;`
+                  transformedCode += newCode
+                  // magicString.overwrite(importStart, importEnd, newCode)
+                } else if (specifier.type === "ImportSpecifier") {
+                  // 处理命名导入
+                  const importStart = node.start
+                  const importEnd = node.end
+                  const importName = specifier.imported.name
+                  const localName = specifier.local.name
+
+                  const newCode = `
+  const ${localName} = (await importModule("${libMaps[node.source.value]}")).${importName}`
+                  transformedCode += newCode
+                } else if (specifier.type === "ImportNamespaceSpecifier") {
+                  // 处理命名空间导入
+                  const importStart = node.start
+                  const importEnd = node.end
+                  const importName = specifier.local.name
+
+                  const newCode = `
+  const ${importName} = await importModule("${libMaps[node.source.value]}");`
+                  transformedCode += newCode
+                  // magicString.overwrite(importStart, importEnd, newCode)
+                }
+                if (index == Object.keys(specifiers).length - 1) {
+                  magicString.overwrite(node.start, node.end, transformedCode)
+                }
+              })
             }
           }
         }

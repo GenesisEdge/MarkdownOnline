@@ -1,4 +1,4 @@
-import { makeAutoObservable, observable } from "mobx";
+import { observable, makeAutoObservable } from "mobx";
 // 对应用状态进行建模。
 class ImageStore {
     constructor(displayState) {

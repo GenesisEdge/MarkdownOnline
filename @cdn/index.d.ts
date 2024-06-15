@@ -1,5 +1,3 @@
-/// <reference types="@Root/js/types" />
-import "@cdn-katex";
 import "../css/index.less";
 /**
  * @description 拓展使能配置

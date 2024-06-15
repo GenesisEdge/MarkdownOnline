@@ -5,13 +5,14 @@ import cdn from "vite-plugin-cdn-import"
 import { viteExternalsPlugin } from "vite-plugin-externals"
 import { resolve } from "path"
 import retryImportPlugin from "./vite/plugins/cdn.config"
-import dynamicImport from 'vite-plugin-dynamic-import'
+import dynamicImport from "vite-plugin-dynamic-import"
 // 然后在你的 vite.config.js 中引入这个插件
 // import importRetryPlugin from "./vite/plugins/cdn.config"
 
 export default defineConfig({
   base: "./",
   build: {
+    target: "esnext",
     rollupOptions: {
       // 配置rollup的一些构建策略
       external: [
@@ -55,6 +56,34 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      "@Asset": resolve(__dirname, "./src/assets"),
+      "@App": resolve(__dirname, "./src/js/functions/App/"),
+      "@Func": resolve(__dirname, "./src/js/functions"),
+      "@Root": resolve(__dirname, "./src/"),
+      "@Com": resolve(__dirname, "./src/js/React/Components"),
+      "@Mobx": resolve(__dirname, "./src/js/React/Mobx"),
+      "@Css": resolve(__dirname, "./src/css"),
+      "@Plugins": resolve(__dirname, "./src/js/functions/Plugins"),
+    },
+  },
+  server: {
+    host: "0.0.0.0",
+  },
+
+  plugins: [
+    viteCompression({
+      threshold: 16000, // 对大于 32kb 的文件进行压缩
+    }),
+    viteExternalsPlugin({
+      react: "React",
+      "react-dom": "ReactDOM",
+      "markdown-it-incremental-dom": "markdownitIncrementalDOM",
+      "incremental-dom": "IncrementalDOM",
+    }),
+    [react({ jsxRuntime: "classic" })],
+    dynamicImport(/* options */),
+    retryImportPlugin({
+      gsap: "https://cdn.jsdelivr.net/npm/gsap@3.12/+esm",
       "react-photo-view":
         "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@V2.1.3/@cdn/lib/react-photo-view/react-photo-view.module.js",
       "@arco-design/web-react":
@@ -81,7 +110,6 @@ export default defineConfig({
       "@emoji-mart/data":
         "https://cdn.jsdmirror.com/npm/@emoji-mart/data@1.1.2/+esm",
       "emoji-mart": "https://cdn.jsdmirror.com/npm/emoji-mart@5.6.0/+esm",
-      gsap: "https://cdn.jsdmirror.com/npm/gsap@3.12.5/+esm",
       "@cdn-emojilib": "https://cdn.jsdmirror.com/npm/emojilib@3.0.11/+esm",
       "@cdn-prettier": "https://cdn.jsdmirror.com/npm/prettier@3.2.4/+esm",
       "@cdn-prettier-plugins-markdown":
@@ -91,11 +119,9 @@ export default defineConfig({
         "https://cdn.jsdmirror.com/npm/string-replace-async@3.0.2/index.min.js",
       html2canvas: "https://cdn.jsdmirror.com/npm/html2canvas@1.4.1/+esm",
       mobx: "https://cdn.jsdmirror.com/npm/mobx@6.12.0/+esm",
-      // "mobx-react-lite":"https://cdn.jsdelivr.net/npm/mobx-react-lite@4.0.7/dist/mobxreactlite.esm.js",
-      // "mobx-react":"https://cdn.jsdmirror.com/npm/mobx-react@9.1.1/dist/mobxreact.esm.js",
       axios: "https://cdn.jsdmirror.com/npm/axios@1.6.5/+esm",
       "@cdn-node-emoji": "https://cdn.jsdmirror.com/npm/node-emoji@2.1.3/+esm",
-      "@cdn-marked": "https://npm.elemecdn.com/marked/lib/marked.esm.js",
+      "@cdn-marked": "https://cdn.jsdmirror.com/npm/marked/lib/marked.esm.js",
       mermaid:
         "https://cdn.jsdmirror.com/npm/mermaid@10/dist/mermaid.esm.min.mjs",
       "@cdn-mermaid":
@@ -104,36 +130,9 @@ export default defineConfig({
       "@cdn-kit":
         "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js",
       "@cdn-hljs":
-        "https://npm.elemecdn.com/@highlightjs/cdn-assets@11.6.0/es/highlight.min.js",
-      "@cdn-katex": "https://npm.elemecdn.com/katex@0.16.7/dist/katex.min.js",
-      "@Asset": resolve(__dirname, "./src/assets"),
-      "@App": resolve(__dirname, "./src/js/functions/App/"),
-      "@Func": resolve(__dirname, "./src/js/functions"),
-      "@Root": resolve(__dirname, "./src/"),
-      "@Com": resolve(__dirname, "./src/js/React/Components"),
-      "@Mobx": resolve(__dirname, "./src/js/React/Mobx"),
-      "@Css": resolve(__dirname, "./src/css"),
-      "@Plugins": resolve(__dirname, "./src/js/functions/Plugins"),
-      // "@arco-design/web-react":"https://cdn.jsdmirror.com/npm/@arco-design/web-react@2.59.0/dist/arco.min.js"
-      // "mobx":"https://cdn.jsdmirror.com/npm/mobx-react@9.1.0/dist/mobxreact.esm.js"
-    },
-  },
-  server: {
-    host: "0.0.0.0",
-  },
-
-  plugins: [
-    viteCompression({
-      threshold: 16000, // 对大于 32kb 的文件进行压缩
+        "https://cdn.jsdmirror.com/npm/@highlightjs/cdn-assets@11.6.0/es/highlight.min.js",
+      "@cdn-katex":
+        "https://cdn.jsdmirror.com/npm/katex@0.16.7/dist/katex.min.js",
     }),
-    viteExternalsPlugin({
-      react: "React",
-      "react-dom": "ReactDOM",
-      "markdown-it-incremental-dom": "markdownitIncrementalDOM",
-      "incremental-dom": "IncrementalDOM",
-    }),
-    [react({ jsxRuntime: "classic" })],
-    dynamicImport(/* options */),
-    retryImportPlugin(),
   ],
 })

@@ -172,7 +172,6 @@ export default function allInit(
    * @description 全局变量初始化
    */
   window._deco = editor.createDecorationsCollection()
-  // window.rImport = importModule
   window._speechData = {
     processing: false,
     speechResult: "",
@@ -182,10 +181,6 @@ export default function allInit(
    * @description 全局事件初始化
    */
   preViewClickEvent(editor, monaco, window._deco)
-  // kit.sleep(5000).then(() => {
-  // const codePlugin = new CodePlugin()
-  // codePlugin.addButtonsToCodeBlocks()
-  // })
 }
 
 // #region ********************config region***************************

@@ -4,14 +4,9 @@ import Picker from "@emoji-mart/react";
 import { Backdrop, Box } from "@mui/material";
 import React from "react";
 import { observer } from "mobx-react";
-// @ts-ignore
 import { gsap } from "gsap";
 import { insertTextMonacoAtCursor } from "@App/text/insertTextAtCursor";
 import { changeEmojiPickerState, getContextMenuClickPosition, } from "@App/config/change";
-// import { isElementOverflow } from "@App/user/layout"
-// or
-// import { Fade } from "@mui/material"
-// import { Zoom } from "@mui/material"
 export default observer(function EmojiPicker(props) {
     const pickerHeight = 435;
     const pickerWidth = 352;

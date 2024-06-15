@@ -210,12 +210,13 @@ declare interface Window {
   mermaid: any
   loadPyodide: any
   _deco: any
-  _prepareCacheData:IPrePare
+  _prepareCacheData: IPrePare
   _speechData: {
     processing: Boolean
     speechResult: string
     speech: any
   }
+  _cdn: { failed: Array; index: number; cdn: string[] }
   showOpenFilePicker: (
     options?: FilePickerOptions
   ) => Promise<FileSystemFileHandle[]>
