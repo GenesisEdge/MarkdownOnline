@@ -15,7 +15,6 @@ export default async function importModule(url: string) {
       if (!window._cdn.failed.includes(cdnDomains[i])) {
         parsedUrl.host = window._cdn.cdn[i]
         const module = await import(/* @vite-ignore */ parsedUrl.toString())
-        // console.log("Successfully loaded module from ", parsedUrl.toString())
         return module
       }
       if (i === cdnDomains.length - 1) {
