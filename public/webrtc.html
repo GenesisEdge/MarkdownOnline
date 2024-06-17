@@ -44,7 +44,7 @@
         peerConnection.ondatachannel = (event) => {
           const dataChannel = event.channel
           dataChannel.onmessage = (event) => {
-            remoteText.value += event.data + "\n"
+            remoteText.value = event.data + "\n"
           }
         }
 

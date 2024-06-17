@@ -12,6 +12,7 @@ import StyledMenu from "@Com/myCom/StyleMenu"
 import Share from "./Share/Share"
 import Export from "./Export/Export"
 import Settings from "./Settings/Settings"
+import Collab from "./Collaborative/Collab"
 import {
   Button,
   Dialog,
@@ -41,12 +42,16 @@ const CustomizedMenus = observer(() => {
   // 4设置 anchor
   const [anchorEl4, setAnchorEl4] = React.useState<null | HTMLElement>(null)
 
+  // 5协同办公 anchor
+  const [anchorEl5, setAnchorEl5] = React.useState<null | HTMLElement>(null)
+
   // 保存提示
   const [modalState, setModalState] = React.useState<boolean>(false)
   const open = Boolean(anchorEl)
   const open2 = Boolean(anchorEl2)
   const open3 = Boolean(anchorEl3)
   const open4 = Boolean(anchorEl4)
+  const open5 = Boolean(anchorEl5)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
@@ -68,6 +73,9 @@ const CustomizedMenus = observer(() => {
   const handleClick4 = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl4(event.currentTarget)
   }
+  const handleClick5 = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl5(event.currentTarget)
+  }
   const handleCloseMenu = () => {
     setAnchorEl(null)
   }
@@ -83,8 +91,11 @@ const CustomizedMenus = observer(() => {
     setAnchorEl4(null)
     e.stopPropagation()
   }
+  const handleCloseCollab = (e: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl5(null)
+    e.stopPropagation()
+  }
   const handleImageManager = () => {
-    // console.log(image.displayState)
     image.display()
     handleCloseMenu()
     // 点击这个的时候 传递一个信号给另一个抽屉组件
@@ -178,17 +189,29 @@ const CustomizedMenus = observer(() => {
           disableRipple
         >
           <Share
-            closAll={handleCloseMenu}
+            closeAll={handleCloseMenu}
             anchorEl={anchorEl2}
             open={open2}
             onClick={handleCloseShare}
           />
         </MenuItem>
-
+        <MenuItem
+          onClick={(e) => {
+            handleClick5(e)
+          }}
+          disableRipple
+        >
+          <Collab
+            closeAll={handleCloseMenu}
+            anchorEl={anchorEl5}
+            closeMenu={handleCloseMenu}
+            open={open5}
+            onClick={handleCloseCollab}
+          />
+        </MenuItem>
         <MenuItem
           onClick={(e) => {
             handleClick4(e)
-            // handleCloseMenu()
           }}
           disableRipple
         >

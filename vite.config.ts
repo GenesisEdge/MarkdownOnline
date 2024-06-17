@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react"
 import cdn from "vite-plugin-cdn-import"
 import { viteExternalsPlugin } from "vite-plugin-externals"
 import { resolve } from "path"
+import path from "path"
 import retryImportPlugin from "./vite/plugins/cdn.config"
 import dynamicImport from "vite-plugin-dynamic-import"
 // 然后在你的 vite.config.js 中引入这个插件
