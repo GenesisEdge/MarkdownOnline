@@ -1,5 +1,4 @@
 import hljs from "@cdn-hljs"
-import { marked } from "@cdn-marked"
 import mermaid, { MermaidConfig } from "mermaid"
 import blankTextInit from "./blankTextInit"
 import { mdConverter } from "@Root/js"
@@ -16,12 +15,6 @@ import { full as markdownItEmoji } from "markdown-it-emoji"
 import kit from "@cdn-kit"
 import { Monaco } from "@monaco-editor/react"
 import { editor } from "monaco-editor"
-import {
-  markItExtension,
-  importUrlExtension,
-  imgExtension,
-  emojiExtension,
-} from "@Func/Parser/renderer"
 import OperateLocalStorage from "@App/localStorage/localStorage"
 import {
   ConfigStore,
@@ -86,22 +79,6 @@ export function markdownParser() {
  */
 class settingsClass {
   constructor() {}
-  markedInit() {
-    marked.use(
-      {
-        mangle: false,
-        headerIds: false,
-        strict: false,
-        extensions: [],
-        async: true,
-        lineNumber: true,
-      },
-      importUrlExtension,
-      imgExtension,
-      markItExtension,
-      emojiExtension
-    )
-  }
   mermaidInit() {
     const mermaidConfig: MermaidConfig = {
       securityLevel: "loose",
@@ -126,7 +103,6 @@ class settingsClass {
     // hljs.registerLanguage('mermaid', window.hljsDefineMermaid);
   }
   settingsAllInit() {
-    this.markedInit()
     this.mermaidInit()
     this.hljsInit()
   }

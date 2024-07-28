@@ -1,5 +1,4 @@
-// import { useState } from "react";
-import React, { Suspense } from "react"
+import React from "react"
 import Header from "./SubComponents/Header"
 
 import Body from "./SubComponents/Body"
@@ -7,17 +6,10 @@ import { observer } from "mobx-react"
 
 import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
-import { orange, green, grey, common, blue, pink } from "@mui/material/colors"
+import { green, blue } from "@mui/material/colors"
 import { getTheme } from "@App/config/change"
-import { Backdrop, Box, CircularProgress } from "@mui/material"
-// import importModule from "@App/import/importModule"
+import { Box } from "@mui/material"
 import kit from "bigonion-kit"
-
-// const kit = await importModule([
-//   "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js",
-//   "https://cdn.jsdelivr.net/npm/bigonion-kit@0.12.3/esm/kit.min.js",
-// ])
-// const LazyHeader = React.lazy(() => import("./SubComponents/Header"))
 const bothStyle: ThemeOptions = {
   zIndex: { drawer: 1300, modal: 1200, appBar: 1200 },
 }
@@ -66,7 +58,6 @@ const App: any = observer(() => {
       background-color: ${getTheme() === "light" ? "#add6ff" : "#636363"};
     }
     `)
-    // handleCloseLoading()
   }, [])
   return (
     <>

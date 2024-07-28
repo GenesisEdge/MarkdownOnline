@@ -25,7 +25,6 @@ export default async () => {
     })
 
   function md2Html(md: string) {
-    // console.log(md);
     return markdownParser().render(md)
   }
   // event mount

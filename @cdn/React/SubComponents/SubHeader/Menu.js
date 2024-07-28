@@ -13,6 +13,7 @@ import StyledMenu from "@Com/myCom/StyleMenu";
 import Share from "./Share/Share";
 import Export from "./Export/Export";
 import Settings from "./Settings/Settings";
+import Collab from "./Collaborative/Collab";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography, } from "@mui/material";
 import myPrint from "@App/export/myPrint";
 import FolderOpenOutlinedIcon from "@mui/icons-material/Folder";
@@ -28,12 +29,15 @@ const CustomizedMenus = observer(() => {
     const [anchorEl3, setAnchorEl3] = React.useState(null);
     // 4设置 anchor
     const [anchorEl4, setAnchorEl4] = React.useState(null);
+    // 5协同办公 anchor
+    const [anchorEl5, setAnchorEl5] = React.useState(null);
     // 保存提示
     const [modalState, setModalState] = React.useState(false);
     const open = Boolean(anchorEl);
     const open2 = Boolean(anchorEl2);
     const open3 = Boolean(anchorEl3);
     const open4 = Boolean(anchorEl4);
+    const open5 = Boolean(anchorEl5);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -56,6 +60,9 @@ const CustomizedMenus = observer(() => {
     const handleClick4 = (event) => {
         setAnchorEl4(event.currentTarget);
     };
+    const handleClick5 = (event) => {
+        setAnchorEl5(event.currentTarget);
+    };
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
@@ -71,8 +78,11 @@ const CustomizedMenus = observer(() => {
         setAnchorEl4(null);
         e.stopPropagation();
     };
+    const handleCloseCollab = (e) => {
+        setAnchorEl5(null);
+        e.stopPropagation();
+    };
     const handleImageManager = () => {
-        // console.log(image.displayState)
         image.display();
         handleCloseMenu();
         // 点击这个的时候 传递一个信号给另一个抽屉组件
@@ -97,9 +107,10 @@ const CustomizedMenus = observer(() => {
                         }, disableRipple: true, children: _jsx(Export, { anchorEl: anchorEl3, open: open3, closeMenu: handleCloseMenu, closeExportMenu: handleCloseExport }) }), _jsx(Divider, { sx: { my: 0.5 } }), _jsx(MenuItem, { onClick: (e) => {
                             handleClick2(e);
                             // handleCloseMenu()
-                        }, disableRipple: true, children: _jsx(Share, { closAll: handleCloseMenu, anchorEl: anchorEl2, open: open2, onClick: handleCloseShare }) }), _jsx(MenuItem, { onClick: (e) => {
+                        }, disableRipple: true, children: _jsx(Share, { closeAll: handleCloseMenu, anchorEl: anchorEl2, open: open2, onClick: handleCloseShare }) }), _jsx(MenuItem, { onClick: (e) => {
+                            handleClick5(e);
+                        }, disableRipple: true, children: _jsx(Collab, { closeAll: handleCloseMenu, anchorEl: anchorEl5, closeMenu: handleCloseMenu, open: open5, onClick: handleCloseCollab }) }), _jsx(MenuItem, { onClick: (e) => {
                             handleClick4(e);
-                            // handleCloseMenu()
                         }, disableRipple: true, children: _jsx(Settings, { closeAll: handleCloseMenu, anchorEl: anchorEl4, open: open4, onClick: handleCloseSettings }) }), _jsxs(MenuItem, { onClick: () => {
                             handleCloseMenu();
                         }, disableRipple: true, children: [_jsx(MoreHorizIcon, {}), "\u66F4\u591A(\u656C\u8BF7\u671F\u5F85)\u00A0\u00A0"] })] })] }));

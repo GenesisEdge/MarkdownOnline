@@ -1,5 +1,4 @@
 import hljs from "@cdn-hljs";
-import { marked } from "@cdn-marked";
 import mermaid from "mermaid";
 import blankTextInit from "./blankTextInit";
 import { mdConverter } from "@Root/js";
@@ -14,7 +13,6 @@ import markdownItTaskLists from "markdown-it-task-lists";
 // @ts-ignore
 import { full as markdownItEmoji } from "markdown-it-emoji";
 import kit from "@cdn-kit";
-import { markItExtension, importUrlExtension, imgExtension, emojiExtension, } from "@Func/Parser/renderer";
 import OperateLocalStorage from "@App/localStorage/localStorage";
 import { ConfigStore, } from "@Root/js/React/Mobx/Config";
 import { markdownitLineNumber } from "@Func/Parser/mdItPlugin/lineNumber";
@@ -70,16 +68,6 @@ export function markdownParser() {
  */
 class settingsClass {
     constructor() { }
-    markedInit() {
-        marked.use({
-            mangle: false,
-            headerIds: false,
-            strict: false,
-            extensions: [],
-            async: true,
-            lineNumber: true,
-        }, importUrlExtension, imgExtension, markItExtension, emojiExtension);
-    }
     mermaidInit() {
         const mermaidConfig = {
             securityLevel: "loose",
@@ -104,7 +92,6 @@ class settingsClass {
         // hljs.registerLanguage('mermaid', window.hljsDefineMermaid);
     }
     settingsAllInit() {
-        this.markedInit();
         this.mermaidInit();
         this.hljsInit();
     }

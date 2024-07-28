@@ -27,14 +27,6 @@ export default async function importModule(url) {
             window._cdn.failed.push(parsedUrl.host);
         }
         return importModule(parsedUrl.toString());
-        //还有得救
-        // if (window._cdn.index < cdnDomains.length - 1) {
-        //   window._cdn.index += 1
-        //   parsedUrl.host = window._cdn.cdn[window._cdn.index]
-        //   return importModule(parsedUrl.toString())
-        // } else {
-        //   console.error("这回是真寄咯！")
-        // }
     }
     throw new Error("Failed to load module from all provided URLs.");
 }

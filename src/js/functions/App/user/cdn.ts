@@ -1,8 +1,7 @@
 export const cdnDomains = [
-  "cdn.jsdmirror.com",
-  "jsd.onmicrosoft.cn",
   "fastly.jsdelivr.net",
   "cdn.jsdelivr.net",
+  "jsd.onmicrosoft.cn",
 ]
 export const cdnDomainsNpm = ["npm.elemecdn.com"]
 export default function cdnInit() {

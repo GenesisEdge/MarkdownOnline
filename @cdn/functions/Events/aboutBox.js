@@ -20,7 +20,6 @@ export default async () => {
         console.error("Error fetching markdown:", error);
     });
     function md2Html(md) {
-        // console.log(md);
         return markdownParser().render(md);
     }
     // event mount

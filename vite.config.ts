@@ -84,19 +84,19 @@ export default defineConfig({
     [react({ jsxRuntime: "classic" })],
     dynamicImport(/* options */),
     retryImportPlugin({
-      gsap: "https://cdn.jsdelivr.net/npm/gsap@3.12/+esm",
+      gsap: "https://cdn.jsdmirror.com/npm/gsap@3.12/+esm",
       "react-photo-view":
-        "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@V2.1.3/@cdn/lib/react-photo-view/react-photo-view.module.js",
+        "https://cdn.jsdmirror.com/npm/react-photo-view-cdn@0.0.1/esm/react-photo-view.module.js",
       "@arco-design/web-react":
         "https://cdn.jsdmirror.com/npm/@arco-design/web-react@2.62.0/+esm",
       "@cdn-emoji-data":
         "https://cdn.jsdmirror.com/npm/@emoji-mart/data@1.2.1/+esm",
       "@cdn-Readme":
-        "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@V2.1.1/README.md",
+        "https://cdn.jsdelivr.net/npm/react-photo-view-cdn@0.0.4/README.md",
       "@cdn-indexedDb-lib":
-        "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@V2.1.1/@cdn/functions/App/db.min.js",
+        "https://cdn.jsdelivr.net/npm/react-photo-view-cdn@0.0.4/esm/db.min.js",
       "@cdn-latex-map":
-        "https://cdn.jsdmirror.com/gh/LiWeny16/MarkdownOnline@main/@cdn/functions/Monaco/snippets/latexRules.min.js",
+        "https://cdn.jsdelivr.net/npm/react-photo-view-cdn@0.0.4/esm/latex.map.min.js",
       "markdown-it": "https://cdn.jsdmirror.com/npm/markdown-it@8.4.2/+esm",
       "markdown-it-emoji":
         "https://cdn.jsdmirror.com/npm/markdown-it-emoji@3.0.0/+esm",
@@ -115,19 +115,16 @@ export default defineConfig({
       "@cdn-prettier": "https://cdn.jsdmirror.com/npm/prettier@3.2.4/+esm",
       "@cdn-prettier-plugins-markdown":
         "https://cdn.jsdmirror.com/npm/prettier@3.2.4/plugins/markdown.js/+esm",
-      vconsole: "https://cdn.jsdmirror.com/npm/vconsole@3.15.1/+esm",
       "string-replace-async":
         "https://cdn.jsdmirror.com/npm/string-replace-async@3.0.2/index.min.js",
       html2canvas: "https://cdn.jsdmirror.com/npm/html2canvas@1.4.1/+esm",
       mobx: "https://cdn.jsdmirror.com/npm/mobx@6.12.0/+esm",
       axios: "https://cdn.jsdmirror.com/npm/axios@1.6.5/+esm",
       "@cdn-node-emoji": "https://cdn.jsdmirror.com/npm/node-emoji@2.1.3/+esm",
-      "@cdn-marked": "https://cdn.jsdmirror.com/npm/marked/lib/marked.esm.js",
       mermaid:
         "https://cdn.jsdmirror.com/npm/mermaid@10/dist/mermaid.esm.min.mjs",
       "@cdn-mermaid":
         "https://cdn.jsdmirror.com/npm/mermaid@10/dist/mermaid.esm.min.mjs",
-
       "@cdn-kit":
         "https://cdn.jsdmirror.com/npm/bigonion-kit@0.12.3/esm/kit.min.js",
       "@cdn-hljs":
